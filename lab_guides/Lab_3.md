@@ -1,55 +1,16 @@
 
-Data Preprocessing
-==================
-
-Anyone who is interested in **machine learning** (**ML**) would have
-certainly heard that 80% of a data scientist or machine learning
-engineer\'s time is spent on preparing the data, and the remaining 20%
-is spent on building and evaluating the model. The considerable time
-spent preparing the data is considered as an investment to construct a
-good model. A simple model this is made using an excellent dataset
-outpaces a complex model developed using a lousy dataset. In real life,
-finding a reliable dataset is very difficult. We have to create and
-nurture good data. You must be wondering, how do you create good data?
-This is something that we will discover in this lab. We will study
-everything that is needed to create an excellent and viable dataset. In
-theory, good is relative to what task we have at hand and how we
-perceive and consume the data. In this lab, we will walk you through
-the following topics:
-
--   Data transformation
--   Feature selection
--   Dimensionality reduction
--   Feature generation
-
-For each of the topics, we will discuss the variety of things that can
-be done over different types of data we encounter in a dataset. We will
-also consider a few automated open source feature preparation tools that
-come in handy for preparing data in Python.
-
-Let\'s begin with the first topic of data transformation.
+Lab 3: Data Preprocessing
+=========================
 
 
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
 
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup.
 
-
-
-
-
-
-Technical requirements
-======================
-
-All the code examples can be found in the [Lab 03] folder in
-GitHub.
-
-
-
-
-
-
-
+All notebooks are present in `lab 03` folder.
 
 
 
@@ -113,41 +74,13 @@ directly applied to transform numerical data in an AutoML pipeline.
 Scaling
 =======
 
-**Standardization** and **normalization** are the two terms for
-**scaling** techniques used in the industry. Both these techniques
-ensure that the numerical features used in the model are weighted
-equally in their representation. Most of the time people use
-standardization and normalization interchangeably. Though both of them
-are scaling techniques, there is a thin line of difference between the
-two.
-
-
-Standardization assumes the data to be normally distributed. It rescales
-the data to mean as zero and standard deviation as one. Normalization is
-a scaling technique that assumes no prior distribution of the data. In
-this technique, the numerical data is rescaled to a fixed range either:
-0 to 1, -1 to +1, and so on.
-
-
-The following are a few widely used techniques for standardizing or
-normalizing data:
-
--   **Z- score standardization**: Here, the data is rescaled with a mean
-    of zero and standard deviation of one if the data follows a Gaussian
-    distribution. One of the prior requirements is having the numerical
-    data normally distributed. Mathematically, it is denoted as
-    ![](./images/4d3f00c3-206e-4596-9585-ff4ae3c1f8dc.png)
-    , where
-    ![](./images/d9d66e48-f6e8-4ee2-9496-6255eee27b11.png)
-    is the mean of the values and σ is the standard deviation of the
-    values.
 
 Scikit-learn provides various methods to standardize and normalize the
 data. Let\'s first load the [HR] attrition dataset using the
 following code snippet:
 
 
-``` {.language-markup}
+```
 %matplotlib inline
 import numpy as np
 import pandas as pd
@@ -166,7 +99,7 @@ the dataset has along with a few data points:
 Let\'s analyze the distribution of the dataset using the following code:
 
 
-``` {.language-markup}
+```
 hr_data[hr_data.dtypes[(hr_data.dtypes=="float64")|(hr_data.dtypes=="int64")].index.values].hist(figsize=[11,11])
 ```
 
@@ -187,7 +120,7 @@ the [fit\_transform] method. In the following example, we use the
 [satisfaction\_level] attribute to be standardized:
 
 
-``` {.language-markup}
+```
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 hr_data_scaler=scaler.fit_transform(hr_data[['satisfaction_level']])
@@ -226,7 +159,7 @@ Next, we need to fit and transform the columns using the
 [fit\_transform] method:
 
 
-``` {.language-markup}
+```
 from sklearn.preprocessing import MinMaxScaler
 minmax=MinMaxScaler()
 hr_data_minmax=minmax.fit_transform(hr_data[[ 'average_montly_hours',
@@ -250,68 +183,12 @@ transformed are having the values distributed between **0** and **1**:
 Missing values
 ==============
 
-We often come across datasets where not all of the values are available
-for specific variables/attributes. This can happen for several reasons,
-such as ignored questions in a survey, typing errors, a device
-malfunctioning, and so on. Encountering these missing values is expected
-in a data mining project, and dealing with these values is essential.
-
-Missing value imputation occupies most of a data scientist\'s time.
-There are various ways through which we can impute missing values. The
-deciding factor is what to use when attributing these kind of
-unavailable values. The process on deciding what and when to use for
-imputing missing values is a talent and comes from experience in working
-with data. Sometimes it is better to remove these values directly and,
-for some assignments, it is better to use advanced mining techniques to
-impute the values.
-
-So, the two most significant questions arise:
-
--   When do you use which imputation method?
--   What is the best way to impute a value?
-
-We think it comes from the experience of handling missing values; the
-best way to start is by doing a comparative study by applying different
-imputation methods on the data and then selecting the appropriate
-technique to assign the null values with the least-biased estimate.
-
-Generally, when we encounter a missing value, we try to examine why a
-value is missing in the first place. Is it because of some issues while
-collecting the data, or is the culprit the data source itself? It is
-better to fix the problem from the root, rather than straight away
-imputing the value. This is an ideal case, and, most of the time, it is
-not possible. For example, if we are working on a survey dataset and a
-few respondents have chosen not to reveal specific information, in such
-cases imputing the values might be inevitable.
-
-So, before we start imputing the values, we can use the following
-guidelines:
-
--   Investigate the missing data
--   Analyze the missing data
--   Decide the best strategy that yields least-biased estimates
-
-We can remember this as an **IAD** rule (that is investigate, analyze,
-and decide) for missing value imputation. The following are some of the
-available ways that we can deal with the missing values:
-
-1.  **Remove or delete the data**: When very few data points are
-    missing, we can ignore the data and analyze those cases separately.
-    This method is known as **list wise deletion**. However, this is not
-    advisable when there are too many missing values as we might lose
-    some of the valuable information in the data. Pairwise deletion is
-    another technique, where we can delete only the missing values. This
-    indicates that we analyze all cases where only data of interest is
-    present. That is a safe strategy, but, using this method, we might
-    get different results from each sample every time even if there is a
-    small change in the data.
-
 We will again use the [HR] attrition dataset to demonstrate the
 missing value treatment. Let\'s first load the dataset and view the
 number of nulls in the dataset:
 
 
-``` {.language-markup}
+```
 import numpy as np
 import pandas as pd
 hr_data = pd.read_csv('data/hr.csv', header=0)
@@ -333,7 +210,7 @@ We use the following code snippet to replace a few values in columns
 [number\_project] with null values:
 
 
-``` {.language-markup}
+```
 #As there are no null introduce some nulls by replacing 0 in promotion_last_5years with NaN
 hr_data[['promotion_last_5years']] = hr_data[[ 'promotion_last_5years']].replace(0, np.NaN)
 #As there are no null introduce some nulls by replacing 262 in promotion_last_5years with NaN
@@ -358,7 +235,7 @@ methods. Next, we drop the rows with missing values using the
 [dropna] method:
 
 
-``` {.language-markup}
+```
 #Remove rows
 hr_data_1 = hr_data.copy()
 print('Shape of the data set before removing nulls ', hr_data_1.shape)
@@ -391,7 +268,7 @@ constant value such as [-999]. The following snippet demonstrates
 the use of this method:
 
 
-``` {.language-markup}
+```
 #Mark global constant for missing values
 hr_data_3 = hr_data.copy()
 # fill missing values with -999
@@ -427,7 +304,7 @@ parameter to replace missing values with mean values. The following code
 demonstrates its usage:
 
 
-``` {.language-markup}
+```
 #Replace mean for missing values
 hr_data_2 = hr_data.copy()
 # fill missing values with mean column values
@@ -464,7 +341,7 @@ Next, the missing values are replaced with a global constant
 can use any of the imputation methods to impute the missing values:
 
 
-``` {.language-markup}
+```
 # make copy to avoid changing original data (when Imputing)
 hr_data_4 = hr_data.copy()
 # make new columns indicating what is imputed
@@ -500,7 +377,7 @@ First, we need to install the [fancyimpute] library using the
 following command. This has to be executed from the Command Prompt:
 
 
-``` {.language-markup}
+```
 pip install fancyimpute
 ```
 
@@ -513,7 +390,7 @@ model with *k* equals to [3] is created and the missing values are
 replaced for numeric attributes:
 
 
-``` {.language-markup}
+```
 from fancyimpute import KNN
 
 hr_data_5 = hr_data.copy()
@@ -569,7 +446,7 @@ Let\'s create a dummy outlier dataset to demonstrate the outlier
 detection and treatment method:
 
 
-``` {.language-markup}
+```
 %matplotlib inline
 import numpy as np
 import matplotlib.pyplot as plt
@@ -588,7 +465,7 @@ final_data = np.r_[normal_data,outliers]
 Let\'s plot the newly created dataset using the following code:
 
 
-``` {.language-markup}
+```
 #Check data
 plt.cla()
 plt.figure(1)
@@ -612,7 +489,7 @@ maximum value. Anything that lies below the minimum and above the
 maximum mark is acknowledged as an outlier:
 
 
-``` {.language-markup}
+```
 ## Detect Outlier###
 plt.boxplot(final_data)
 ```
@@ -652,7 +529,7 @@ The inter-quartile range is the difference between the third quartile
 We calculate the [IQR] in Python using the following code:
 
 
-``` {.language-markup}
+```
 ## IQR Method Outlier Detection and Removal(filter) ##
 quartile75, quartile25 = np.percentile(final_data, [75 ,25])
 ## Inter Quartile Range ##
@@ -692,7 +569,7 @@ We utilize the following Python code to calculate the [Max] and
 [Min] values of a dataset:
 
 
-``` {.language-markup}
+```
 ## Calculate Min and Max values ##
 min_value = quartile25 - (IQR*1.5)
 max_value = quartile75 + (IQR*1.5)
@@ -713,7 +590,7 @@ Next, we filter the values that are below the [min\_value] and
 above the [max\_value] using the following code:
 
 
-``` {.language-markup}
+```
 filtered_values = final_data.copy()
 filtered_values[ filtered_values< min_value] = np.nan
 filtered_values[ filtered_values > max_value] = np.nan
@@ -756,7 +633,7 @@ computations and substitution of tail values are made by this method,
 and resulting outlier free data is generated:
 
 
-``` {.language-markup}
+```
 ##### Winsorization ####
 from scipy.stats.mstats import winsorize
 import statsmodels.api as sm
@@ -791,7 +668,7 @@ limit of [0.1] are passed as parameters to the function to trim
 10% of data from both ends:
 
 
-``` {.language-markup}
+```
 ### Trimming Outliers ###
 from scipy import stats
 trimmed_data = stats.trimboth(final_data, 0.1)
@@ -832,7 +709,7 @@ one-hot encoded variables, and invoke the [IsolationForest] method
 with the number of estimators:
 
 
-``` {.language-markup}
+```
 ##Isolation forest
 import numpy as np
 import pandas as pd
@@ -852,7 +729,7 @@ outliers are denoted by [-1] and non-outliers (also known as
 **novel data**) by [1]:
 
 
-``` {.language-markup}
+```
 clf.fit(data_trnsf)
 y_pred_train = clf.predict(data_trnsf)
 data_trnsf['outlier'] = y_pred_train
@@ -911,7 +788,7 @@ and want it binned in a certain format. The following code is a function
 that performs binning based on the predefined cut points:
 
 
-``` {.language-markup}
+```
 #Bin Values:
 def bins(column, cutpoints, labels=None):
  #Define min and max values:
@@ -935,7 +812,7 @@ than [0.6] score is considered a highly-satisfied employee score,
 and between these two values is considered as [medium]:
 
 
-``` {.language-markup}
+```
 import pandas as pd
 hr_data = pd.read_csv('data/hr.csv', header=0)
 hr_data.head()
@@ -976,7 +853,7 @@ The following is a demonstration of square root transformation using a
 dummy dataset:
 
 
-``` {.language-markup}
+```
 import numpy as np
 values = np.array([-4, 6, 68, 46, 89, -25])
 # Square root transformation #
@@ -994,7 +871,7 @@ The following is the output of the preceding square root transformation:
 Next, let us try out a log transformation using another dummy dataset:
 
 
-``` {.language-markup}
+```
 values = np.array([10, 60, 80, 200])
 #log transformation #
 log_trnsf_values = np.log(1+values)
@@ -1075,7 +952,7 @@ You can install the [category\_encoders] library using the
 following command:
 
 
-``` {.language-markup}
+```
 pip install category_encoders
 ```
 
@@ -1086,7 +963,7 @@ short code that supports using it easily in code). We load the
 attribute:
 
 
-``` {.language-markup}
+```
 import pandas as pd
 import category_encoders as ce
 hr_data = pd.read_csv('data/hr.csv', header=0)
@@ -1112,7 +989,7 @@ Similarly, we use [OrdinalEncoder] to label encode the
 [salary] data:
 
 
-``` {.language-markup}
+```
 ordinal_encoder = ce.OrdinalEncoder(cols=['salary'])
 ordinal_df = ordinal_encoder.fit_transform(hr_data)
 ordinal_df.head(10)
@@ -1132,7 +1009,7 @@ Similarly, you can try out the other categorical encoding methods from
 the results:
 
 
-``` {.language-markup}
+```
 binary_encoder = ce.BinaryEncoder(cols=['salary'])
 df_binary = binary_encoder.fit_transform(hr_data)
 df_binary.head()
@@ -1181,7 +1058,7 @@ missing value treatment for the categorical attributes. Let\'s first
 load the dataset and observe the number of nulls in the dataset:
 
 
-``` {.language-markup}
+```
 import numpy as np
 import pandas as pd
 hr_data = pd.read_csv('data/hr.csv', header=0)
@@ -1202,7 +1079,7 @@ value in the [sales] attribute and low with nulls for the
 [salary] attribute:
 
 
-``` {.language-markup}
+```
 #As there are no null introduce some nulls by replacing sales in sales column with NaN
 hr_data[['sales']] = hr_data[[ 'sales']].replace('sales', np.NaN)
 #As there are no null introduce some nulls by replacing low in salary column with NaN
@@ -1226,7 +1103,7 @@ Next, we fill the rows with the mode values using the [fillna]
 method, as described in the following code snippet:
 
 
-``` {.language-markup}
+```
 #Replace mode for missing values
 hr_data_1 = hr_data.copy()
 # fill missing values with mode column values
@@ -1252,7 +1129,7 @@ We can see from the following output that the missing values in the
     missing values from the rest of the dataset:
 
 
-``` {.language-markup}
+```
 #Mark global constant for missing values
 hr_data_2 = hr_data.copy()
 # fill missing values with global constant values
@@ -1291,35 +1168,11 @@ for models to consume.
 Text preprocessing
 ==================
 
-It is necessary to reduce the size of the feature space of text data by
-removing unnecessary text that adds noise to the text during analysis.
-There are a series of steps that are usually performed to preprocess the
-text data. However, not all steps are required for each task and they
-are used whenever necessary. For example, if every word in a text data
-item is already in lower case, there is no need to modify the case of
-the text to make it uniform.
 
-There are three main elements of a text preprocessing task:
-
--   Tokenization
--   Normalization
--   Substitution
-
-We will be using the [nltk] library for demonstrating the
-different text preprocessing methods. Install the [nltk] library
-by issuing the following command in the Command Prompt:
+We will be using the [nltk] library for demonstrating the different text preprocessing methods. Run the following code snippet in the Python environment:
 
 
-``` {.language-markup}
-pip install nltk
 ```
-
-
-Once installation is complete, run the following code snippet in the
-Python environment:
-
-
-``` {.language-markup}
 ##Run this cell only once##
 import nltk
 nltk.download()
@@ -1342,7 +1195,7 @@ employed to preprocess text to produce a normalized form:
     snippet:
 
 
-``` {.language-markup}
+```
 import pandas as pd
 import category_encoders as ce
 text_file = open('data/example_text.txt', 'rt')
@@ -1356,7 +1209,7 @@ text_file.close()
     the text as a parameter:
 
 
-``` {.language-markup}
+```
 ## Sentence tokenization ##
 from nltk import sent_tokenize
 sentence = sent_tokenize(text)
@@ -1376,7 +1229,7 @@ The preceding code yields the following output:
     words, as shown in the following code snippet:
 
 
-``` {.language-markup}
+```
 ## Word tokenization ##
 from nltk import word_tokenize
 words = word_tokenize(text)
@@ -1402,7 +1255,7 @@ There are various methods using which we can remove the non-alphabetical
 characters. Now we will illustrate one of the methods in Python:
 
 
-``` {.language-markup}
+```
 # Remove punctuations and keep only alphabets
 words_cleaned = [word for word in words if word.isalpha()]
 print(words_cleaned[:50])
@@ -1433,7 +1286,7 @@ method from the [ntlk.corpus] library. Then we invoke the
 method and remove any common words that are found in the list of tokens:
 
 
-``` {.language-markup}
+```
 # remove the stop words
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
@@ -1460,7 +1313,7 @@ We can use the [lower] function to convert all uppercase letters
 to lower case, as shown in the following code snippet:
 
 
-``` {.language-markup}
+```
 # Case folding
 words_lower = [words_1.lower() for words_1 in words_1]
 print(words_lower[:50])
@@ -1486,7 +1339,7 @@ library and instance the [PorterStemmer] class. Next, the
 class to reduce each word to its root form:
 
 
-``` {.language-markup}
+```
 #Stemming
 from nltk.stem.porter import PorterStemmer
 porter = PorterStemmer()
@@ -1517,29 +1370,6 @@ number of features while working on an ML pipeline.
 Feature selection
 =================
 
-An ML model uses some critical features to learn patterns in data. All
-other features add noise to the model, which may lead to a drop in the
-model\'s accuracy and overfit the model to the data as well. So,
-selecting the right features is essential. Also, working a reduced set
-of important features reduces the model training time.
-
-The following are some of the ways to select the right features prior
-creating a model:
-
--   We can identify the correlated variables and remove any one of the
-    highly-correlated values
--   Remove the features with low variance
--   Measure information gain for the available set of features and
-    choose the top *N* features accordingly
-
-Also, after creating a baseline model, we can use some of the below
-methods to select the right features:
-
--   Use linear regression and select variables based on *p* values
--   Use stepwise selection for linear regression and select the
-    important variables
--   Use random forest and select the top *N* important variables
-
 In the following sections, we will see some of the ways available in
 scikit-learn to reduce the number of features available in a dataset.
 
@@ -1563,7 +1393,7 @@ methods and the recursive feature elimination algorithm. The following
 is an example to illustrate this method:
 
 
-``` {.language-markup}
+```
 %matplotlib inline
 import pandas as pd
 import numpy as np
@@ -1587,7 +1417,7 @@ Next, we assign [left] as a target variable and other attributes
 as the independent attributes, as shown in the following code:
 
 
-``` {.language-markup}
+```
 X = data_trnsf.drop('left', axis=1)
 X.columns
 Y = data_trnsf.left# feature extraction
@@ -1604,7 +1434,7 @@ discarded and will not be selected as a feature. We execute the
 following code snippet to observe the reduced set of features:
 
 
-``` {.language-markup}
+```
 #Variance Threshold
 from sklearn.feature_selection import VarianceThreshold
 # Set threshold to 0.2
@@ -1642,7 +1472,7 @@ The following example illustrates the chi-squared statistical test to
 select the best features from the [HR] attrition dataset:
 
 
-``` {.language-markup}
+```
 #Chi2 Selector
 
 from sklearn.feature_selection import SelectKBest
@@ -1686,7 +1516,7 @@ of algorithm used. For our demonstration, we have used the
 [LogisticRegression] method:
 
 
-``` {.language-markup}
+```
 #Recursive Feature Elimination
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
@@ -1724,7 +1554,7 @@ the process to create a random forest model in Lab 2,
 *Introduction to Machine Learning using Python*:
 
 
-``` {.language-markup}
+```
 # Feature Importance
 from sklearn.ensemble import RandomForestClassifier
 # fit a RandomForest model to the data
@@ -1767,48 +1597,12 @@ attributes.
 Principal Component Analysis
 ============================
 
-**Principal Component Analysis** (**PCA**) transforms the data in the
-high-dimensional space to a space of fewer dimensions. Let\'s consider
-visualization of a 100-dimensional dataset. It is barely possible to
-efficiently show the shape of such high-dimensional data distribution.
-PCA provides an efficient way to reduce the dimensionality by forming
-various principal components that explain the variability of the data in
-a reduced dimensional space.
-
-Mathematically, given a set of variables, *X~1~, X~2~,\...., X~p~*,
-where there are *p* original variables. In PCA we are looking for a set
-of new variables, *Z~1~, Z~2~,\....,Z~p~*, that are weighted averages of
-the original variables (after subtracting their mean):
-
-
-![](./images/bbc81ee4-5174-45f0-b76e-e2b2223c658e.png)
-
-
-
-![](./images/29efcfd6-cbc5-4491-9d2a-f461e8d2efb2.png)
-
-
-Where each pair of *Z*\'s has correlation =0
-
-The resulting *Z*\'s are ordered by their variance, with *Z~1~* having
-the largest variance and *Z~p~* having the smallest variance.
-
-
-Always, the first component extracted in a PCA accounts for a maximum
-amount of total variance in the observed variables. The second component
-extracted will account for a maximal amount of variance in the dataset
-that was not accounted for by the first component and it is also
-uncorrelated with the first component. If we compute the correlation
-between the first component and second component the correlation would
-be zero.
-
-
 We use the [HR] attrition data to demonstrate the use of PCA.
 First, we load the [numpy] and [pandas] library to the
 environment and load the [HR] dataset:
 
 
-``` {.language-markup}
+```
 import numpy as np
 import pandas as pd
 hr_data = pd.read_csv('data/hr.csv', header=0)
@@ -1831,7 +1625,7 @@ method, the numeric attributes of the [HR] dataset are
 standardized:
 
 
-``` {.language-markup}
+```
 from sklearn.preprocessing import StandardScaler
 hr_numeric = hr_data.select_dtypes(include=[np.float])
 hr_numeric_scaled = StandardScaler().fit_transform(hr_numeric)
@@ -1845,7 +1639,7 @@ principal components to be built. Then, the variance explained by these
 two principal components is determined:
 
 
-``` {.language-markup}
+```
 from sklearn.decomposition import PCA
 pca = PCA(n_components=2)
 principalComponents = pca.fit_transform(hr_numeric_scaled)
@@ -1868,63 +1662,15 @@ create features.
 
 
 
-
-
-
-
-
-
-
 Feature generation
 ==================
-
-Creating new features out of the existing features is an art and it can
-be done in many different ways.
-
-
-The objective of feature creation is to provide ML algorithms with such
-predictors that makes it easy for them to understand the patterns and
-derive better relationship from the data.
-
-
-For example, in [HR] attrition problems, the duration of stay of
-an employee in an organization is an important attribute. However,
-sometimes we don\'t have the duration of stay as a feature in the
-dataset, but we have the employee start date. In such cases, we can
-create the data for the duration of stay feature by subtracting the
-employee start date from the current date.
-
-In the following sections, we will see some of the different ways to
-generate new features out of the data. However, this is not an extensive
-list, but a few different methods that can be employed to create new
-features. One needs to think through the problem statement, explore the
-data, and be creative to discover new ways to build features:
-
--   **Numerical feature generation**: Generating new features out of
-    numerical data is somewhat easier than other data types. Even if we
-    don\'t understand the meaning of various numerical features, we can
-    do various kinds of operations, such as adding two or more numbers,
-    computing the relative differences, and multiplying and dividing the
-    numbers. After this task, we identify what are the important
-    features out of all generated features and discard the others.
-    Though it is a resource intensive task, it helps to discover new
-    features when we are unaware of direct methods to derive new
-    features.
-
-The process of adding and computing differences between a pair of
-numerical features is known as **pairwise feature creation**.
-
-There is another method known as [PolynomialFeatures] creation,
-where we automatically perform all polynomial combinations of the
-features. It helps to map complex relationships between the features
-that can suggest some unique states.
 
 We can generate polynomial features using scikit-learn\'s
 [PolynomialFeatures] method. Let\'s first create dummy data, as
 shown in the following code snippet:
 
 
-``` {.language-markup}
+```
 #Import PolynomialFeatures
 from sklearn.preprocessing import PolynomialFeatures
 #Create matrix and vectors
@@ -1938,7 +1684,7 @@ generate features with degrees less than or equal to the specified
 degree:
 
 
-``` {.language-markup}
+```
 # Generate Polynomial Features 
 ploy_features = PolynomialFeatures(degree=2)
 var1_ = ploy_features.fit_transform(var1)

@@ -1,69 +1,15 @@
 
-Automated Algorithm Selection
-=============================
-
-This lab offers a glimpse into the vast landscape of **machine
-learning** (**ML**) algorithms. A bird\'s-eye view will show you the
-kind of learning problems that you can tackle with ML, which you have
-already learned. Let\'s briefly review them.
-
-If examples/observations in your dataset have associated labels, then
-these labels can provide guidance to algorithms during model training.
-Having this guidance or supervision, you will use supervised or
-semi-supervised learning algorithms. If you don\'t have labels, you will
-use unsupervised learning algorithms.
-
-There are other cases that require different approaches, such as
-reinforcement learning, but, in this lab, the main focus will be on
-supervised and unsupervised algorithms.
-
-The next frontier in ML pipelines is automation. When you first think
-about automating ML pipelines, the core elements are feature
-transformation, model selection, and hyperparameter optimization.
-However, there are some other points that you need to consider for your
-specific problem and you will examine the following points throughout
-this lab:
-
--   Computational complexity
--   Differences in training and scoring time
--   Linearity versus non-linearity
--   Algorithm-specific feature transformations
-
-Understanding these will help you to understand which algorithms may
-suit your needs for a given problem. By the end of this lab:
-
--   You will have learned the basics of automated supervised learning
-    and unsupervised learning
--   You will have learned the main aspects to consider when working with
-    ML pipelines
--   You will have practiced your skills on various use cases and built
-    supervised and unsupervised ML pipelines
+Lab 4: Automated Algorithm Selection
+====================================
 
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
 
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup.
 
-
-
-
-
-
-
-Technical requirements
-======================
-
-Check the [requirements.txt] file for libraries to be installed to
-run code examples in GitHub for this lab.
-
-All the code examples can be found in the [Lab 04] folder in
-GitHub.
-
-
-
-
-
-
-
-
+All notebooks are present in `lab 04` folder.
 
 
 Computational complexity
@@ -110,7 +56,7 @@ block will help you to plot how different complexities grow as a
 function of their input size:
 
 
-``` {.language-markup}
+```
 # Importing necessary libraries
 import pandas as pd
 import numpy as np
@@ -163,9 +109,6 @@ We get the following plot as the output of the preceding code:
 
 
 
-Different complexities grow as a function of their input size
-
-
 One thing to note here is that there are some crossover points between
 different levels of complexities. This shows the role of data size.
 It\'s easy to understand the complexity of simple examples, but what
@@ -177,41 +120,6 @@ already piqued your interest, continue reading the next section.
 
 
 
-
-
-
-
-Differences in training and scoring time
-========================================
-
-Time spent for training and scoring can make or break a ML project. If
-an algorithm takes too long to train on currently available hardware,
-updating the model with new data and hyperparameter optimization will be
-painful, which may force you to cross that algorithm out from your
-candidate list. If an algorithm takes too long to score, then this is
-probably a problem in the production environment since your application
-may require fast inference times such as milliseconds or microseconds to
-get predictions. That\'s why it\'s important to learn the inner workings
-of ML algorithms, at least the common ones at first, to sense-check
-algorithms suitability.
-
-For example, supervised learning algorithms learn the relationship
-between sets of examples and their associated labels the during training
-process, where each example consists of a set of features. A training
-job will output an ML model upon successful completion, which can be
-used to make new predictions. When a model is fed with new examples
-without a label, relationships that are mapped between features and the
-labels during training are used to predict the label. Time spent for
-predicting is usually small, since the learned weights of the model will
-be applied to new data.
-
-However, some supervised algorithms skip this training phase and they
-score based on all the available examples in the training dataset. Such
-algorithms are called **instance-based** or **lazy learners**. For
-instance-based algorithms, training simply means storing all feature
-vectors and their associated labels in memory, which is whole training
-dataset. This practically means that as you increase the size of your
-dataset, your model will require more compute and memory resources.
 
 
 
@@ -233,7 +141,7 @@ Just to make things easier, the following function will be used to
 measure the time spent on a given line:
 
 
-``` {.language-markup}
+```
 from contextlib import contextmanager
 from time import time
 
@@ -249,7 +157,7 @@ def timer():
 You can use this function in the following way:
 
 
-``` {.language-markup}
+```
 import numpy as np
 
 with timer():
@@ -260,7 +168,7 @@ with timer():
 It outputs the time spent executing that line:
 
 
-``` {.language-markup}
+```
 Elapsed time: 0.0001399517059326172 ms
 ```
 
@@ -269,7 +177,7 @@ Now, you can work with [KNeighborsClassifier] of the scikit-learn
 library and measure the time spent for training and scoring:
 
 
-``` {.language-markup}
+```
 from sklearn.neighbors import KNeighborsClassifier
 
 # Defining properties of dataset
@@ -302,7 +210,7 @@ with timer():
 Let\'s see the output:
 
 
-``` {.language-markup}
+```
 Elapsed time: 1.0800271034240723 ms
 Elapsed time: 0.43231201171875 ms
 ```
@@ -312,7 +220,7 @@ Just to have an idea about how this compares to other algorithms, you
 can try one more classifier, such as logistic regression:
 
 
-``` {.language-markup}
+```
 from sklearn.linear_model import LogisticRegression
 log_res = LogisticRegression(C=1e5)
 
@@ -327,7 +235,7 @@ with timer():
 The output for logistic regression is as follows:
 
 
-``` {.language-markup}
+```
 Elapsed time: 12.989803075790405 ms
 Elapsed time: 0.00024318695068359375 ms
 ```
@@ -359,7 +267,7 @@ The [cProfile] module in Python will help you to see time
 statistics for every function. Here\'s a small example:
 
 
-``` {.language-markup}
+```
 # cProfile
 import cProfile
 
@@ -372,7 +280,7 @@ random samples that are drawn from uniform distribution. The output will
 show time statistics for all the function calls to execute a given line:
 
 
-``` {.language-markup}
+```
 23 function calls in 0.025 seconds
    Ordered by: standard name
    ncalls tottime percall cumtime percall filename:lineno(function)
@@ -420,7 +328,7 @@ The following code snippet will allow you to examine the decision
 boundaries of different types of algorithms:
 
 
-``` {.language-markup}
+```
 import matplotlib.cm as cm
 
 # This function will scale training datatset and train given classifier.
@@ -489,7 +397,7 @@ Decision boundary of logistic regression
 You can start with logistic regression to test this function:
 
 
-``` {.language-markup}
+```
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -519,7 +427,7 @@ Now, you can use the [draw\_decision\_boundary] function to
 visualize the decision boundary for [LogisticRegression]:
 
 
-``` {.language-markup}
+```
 draw_decision_boundary(LogisticRegression(), X, y)
 ```
 
@@ -553,7 +461,7 @@ hyperparameters to play with but for the sake of simplicity, you will
 use the default configuration:
 
 
-``` {.language-markup}
+```
 from sklearn.ensemble import RandomForestClassifier
 
 draw_decision_boundary(RandomForestClassifier(), X, y)
@@ -650,7 +558,7 @@ In [sklearn], there are some useful ways to create sample datasets
 for testing algorithms:
 
 
-``` {.language-markup}
+```
 # Importing necessary libraries for visualization
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -704,7 +612,7 @@ We get the following plot from the preceding code:
 [\[0.4, 0.5, 0.6, 0.5\]] and try again:
 
 
-``` {.language-markup}
+```
 cluster_std = [0.4, 0.5, 0.6, 0.5] 
 
 X, y = make_blobs(n_samples=1000,
@@ -730,7 +638,7 @@ experiments. First, you will use the [fit\_predict] method to
 apply one or more clustering algorithms on the sample dataset:
 
 
-``` {.language-markup}
+```
 class Unsupervised_AutoML:
 
     def __init__(self, estimators=None, transformers=None):
@@ -745,7 +653,7 @@ estimators and transformers. The second class method will be
 [fit\_predict]:
 
 
-``` {.language-markup}
+```
 def fit_predict(self, X, y=None):
     """
     fit_predict will train given estimator(s) and predict cluster membership for each sample
@@ -774,7 +682,7 @@ method to get the performance metrics, which is defined in the following
 code block:
 
 
-``` {.language-markup}
+```
 # Printing cluster metrics for given arguments
 def _get_cluster_metrics(self, name, n_clusters_, X, pred_labels, true_labels=None):
     from sklearn.metrics import homogeneity_score, \
@@ -838,7 +746,7 @@ K-means algorithm in action
 You can now apply the [KMeans] algorithm to see how it works:
 
 
-``` {.language-markup}
+```
 from sklearn.cluster import KMeans
 
 estimators = [{'estimator': KMeans, 'args':(), 'kwargs':{'n_clusters': 4}}]
@@ -850,7 +758,7 @@ unsupervised_learner = Unsupervised_AutoML(estimators)
 You can see the [estimators]:
 
 
-``` {.language-markup}
+```
 unsupervised_learner.estimators
 ```
 
@@ -858,7 +766,7 @@ unsupervised_learner.estimators
 These will output the following:
 
 
-``` {.language-markup}
+```
 [{'args': (),
  'estimator': sklearn.cluster.k_means_.KMeans,
  'kwargs': {'n_clusters': 4}}]
@@ -869,7 +777,7 @@ You can now invoke [fit\_predict] to obtain [predictions]
 and [performance\_metrics]:
 
 
-``` {.language-markup}
+```
 predictions, performance_metrics = unsupervised_learner.fit_predict(X, y)
 ```
 
@@ -877,7 +785,7 @@ predictions, performance_metrics = unsupervised_learner.fit_predict(X, y)
 Metrics will be written to the console:
 
 
-``` {.language-markup}
+```
 ################## KMeans metrics #####################
   Silhouette Coefficient: 0.631
   Estimated number of clusters: 4.000
@@ -892,7 +800,7 @@ Metrics will be written to the console:
 You can always print metrics later:
 
 
-``` {.language-markup}
+```
 pprint(performance_metrics)
 ```
 
@@ -900,7 +808,7 @@ pprint(performance_metrics)
 This will output the name of the estimator and its metrics:
 
 
-``` {.language-markup}
+```
 {'KMeans': {'Silhouette Coefficient': 0.9280431207593165, 'Estimated number of clusters': 4, 'Homogeneity': 1.0, 'Completeness': 1.0, 'V-measure': 1.0, 'Adjusted Rand Index': 1.0, 'Adjusted Mutual Information': 1.0}}
 ```
 
@@ -909,7 +817,7 @@ Let\'s add another class method to plot the clusters of the given
 estimator and predicted labels:
 
 
-``` {.language-markup}
+```
 # plot_clusters will visualize the clusters given predicted labels
 def plot_clusters(self, estimator, X, labels, plot_kwargs):
 
@@ -927,7 +835,7 @@ def plot_clusters(self, estimator, X, labels, plot_kwargs):
 Let\'s see the usage:
 
 
-``` {.language-markup}
+```
 plot_kwargs = {'s': 12, 'linewidths': 0.1}
 unsupervised_learner.plot_clusters(KMeans,
                                    X,
@@ -956,7 +864,7 @@ such as differences in variance, k-means will fail to identify clusters
 correctly:
 
 
-``` {.language-markup}
+```
 X, y = make_blobs(n_samples=2000, centers=5, cluster_std=[1.7, 0.6, 0.8, 1.0, 1.2], random_state=220)
 
 # Plot sample data
@@ -975,7 +883,7 @@ Although this sample dataset is generated with five centers, it\'s not
 that obvious and there might be four clusters, as well:
 
 
-``` {.language-markup}
+```
 from sklearn.cluster import KMeans
 
 estimators = [{'estimator': KMeans, 'args':(), 'kwargs':{'n_clusters': 4}}]
@@ -991,7 +899,7 @@ predictions, performance_metrics = unsupervised_learner.fit_predict(X, y)
 Metrics in the console are as follows:
 
 
-``` {.language-markup}
+```
 ################## KMeans metrics #####################
   Silhouette Coefficient: 0.549
   Estimated number of clusters: 4.000
@@ -1006,7 +914,7 @@ Metrics in the console are as follows:
 [KMeans] clusters are plotted as follows:
 
 
-``` {.language-markup}
+```
 plot_kwargs = {'s': 12, 'linewidths': 0.1}
 unsupervised_learner.plot_clusters(KMeans,
                                    X,
@@ -1035,7 +943,7 @@ DBSCAN is one of the clustering algorithms that can deal with non-flat
 geometry and uneven cluster sizes. Let\'s see what it can do:
 
 
-``` {.language-markup}
+```
 from sklearn.cluster import DBSCAN
 
 estimators = [{'estimator': DBSCAN, 'args':(), 'kwargs':{'eps': 0.5}}]
@@ -1049,7 +957,7 @@ predictions, performance_metrics = unsupervised_learner.fit_predict(X, y)
 Metrics in the console are as follows:
 
 
-``` {.language-markup}
+```
 ################## DBSCAN metrics #####################
   Silhouette Coefficient: 0.231
   Estimated number of clusters: 12.000
@@ -1064,7 +972,7 @@ Metrics in the console are as follows:
 [DBSCAN] clusters are plotted as follows:
 
 
-``` {.language-markup}
+```
 plot_kwargs = {'s': 12, 'linewidths': 0.1}
 unsupervised_learner.plot_clusters(DBSCAN,
                                    X,
@@ -1101,7 +1009,7 @@ Agglomerative clustering algorithm in action
 Our last try will be with an agglomerative clustering algorithm:
 
 
-``` {.language-markup}
+```
 from sklearn.cluster import AgglomerativeClustering
 
 estimators = [{'estimator': AgglomerativeClustering, 'args':(), 'kwargs':{'n_clusters': 4, 'linkage': 'ward'}}]
@@ -1115,7 +1023,7 @@ predictions, performance_metrics = unsupervised_learner.fit_predict(X, y)
 Metrics in the console are as follows:
 
 
-``` {.language-markup}
+```
 ################## AgglomerativeClustering metrics #####################
   Silhouette Coefficient: 0.546
   Estimated number of clusters: 4.000
@@ -1130,7 +1038,7 @@ Metrics in the console are as follows:
 [AgglomerativeClustering] clusters are plotted as follows:
 
 
-``` {.language-markup}
+```
 plot_kwargs = {'s': 12, 'linewidths': 0.1}
 unsupervised_learner.plot_clusters(AgglomerativeClustering,
                                    X,
@@ -1162,7 +1070,7 @@ The following code will load the [Breast Cancer Wisconsin
 Diagnostic] dataset, which is commonly used in ML tutorials:
 
 
-``` {.language-markup}
+```
 # Wisconsin Breast Cancer Diagnostic Dataset
 from sklearn.datasets import load_breast_cancer
 import pandas as pd
@@ -1178,7 +1086,7 @@ df.head()
 Output in the console is as follows:
 
 
-``` {.language-markup}
+```
    mean radius mean texture mean perimeter mean area mean smoothness \
 0 17.99 10.38 122.80 1001.0 0.11840 
 1 20.57 17.77 132.90 1326.0 0.08474 
@@ -1213,7 +1121,7 @@ characteristics of a tumor in the given patient.
 feature:
 
 
-``` {.language-markup}
+```
 df.describe()
 
        mean radius mean texture mean perimeter mean area \
@@ -1265,7 +1173,7 @@ The following code block shows you how to apply PCA with two components
 and visualize the results:
 
 
-``` {.language-markup}
+```
 # PCA
 from sklearn.decomposition import PCA
 
@@ -1294,7 +1202,7 @@ particular area and it\'s hard to separate classes. Differences in
 variances distort our view and scaling can help:
 
 
-``` {.language-markup}
+```
 # Preprocess data.
 scaler = StandardScaler()
 scaler.fit(df)
@@ -1307,7 +1215,7 @@ After preprocessing data by applying [StandardScaler], the dataset
 has unit variance:
 
 
-``` {.language-markup}
+```
 scaled_features_df.describe()
 
         mean radius mean texture mean perimeter mean area \
@@ -1351,7 +1259,7 @@ Apply PCA to see whether the first two principal components are enough
 to separate labels:
 
 
-``` {.language-markup}
+```
 # PCA
 from sklearn.decomposition import PCA
 
@@ -1387,7 +1295,7 @@ You can also try t-SNE to visualize high-dimensional data. First,
 [TSNE] will be applied to the original data:
 
 
-``` {.language-markup}
+```
 # TSNE
 from sklearn.manifold import TSNE
 
@@ -1399,7 +1307,7 @@ tsne = tsne.fit_transform(df)
 Output in the console is as follows:
 
 
-``` {.language-markup}
+```
 [t-SNE] Computing 121 nearest neighbors...
 [t-SNE] Indexed 569 samples in 0.000s...
 [t-SNE] Computed neighbors for 569 samples in 0.010s...
@@ -1413,7 +1321,7 @@ Output in the console is as follows:
 Plotting the results is as follows:
 
 
-``` {.language-markup}
+```
 plt.scatter(tsne[:, 0], tsne[:, 1], c=data.target, cmap="winter", edgecolor="None", alpha=0.35)
 plt.colorbar()
 plt.title('t-SNE')
@@ -1434,7 +1342,7 @@ Plot of TSNE
 Applying [TSNE] on scaled data is as follows:
 
 
-``` {.language-markup}
+```
 tsne = TSNE(verbose=1, perplexity=40, n_iter=4000)
 tsne = tsne.fit_transform(scaled_features_df)
 ```
@@ -1443,7 +1351,7 @@ tsne = tsne.fit_transform(scaled_features_df)
 Output in the console is as follows:
 
 
-``` {.language-markup}
+```
 [t-SNE] Computing 121 nearest neighbors...
 [t-SNE] Indexed 569 samples in 0.001s...
 [t-SNE] Computed neighbors for 569 samples in 0.018s...
@@ -1457,7 +1365,7 @@ Output in the console is as follows:
 Plotting the results is as follows:
 
 
-``` {.language-markup}
+```
 plt.scatter(tsne[:, 0], tsne[:, 1], c=data.target, cmap="winter", edgecolor="None", alpha=0.35)
 plt.colorbar()
 plt.title('t-SNE')
@@ -1485,7 +1393,7 @@ include a decomposer in your pipeline, so that you can visualize
 high-dimensional data if necessary:
 
 
-``` {.language-markup}
+```
 def fit_predict(self, X, y=None, scaler=True, decomposer={'name': PCA, 'args':[], 'kwargs': {'n_components': 2}}):
     """
     fit_predict will train given estimator(s) and predict cluster membership for each sample
@@ -1546,7 +1454,7 @@ Now, you can apply [fit\_predict] to your datasets. The following
 code block shows you an example of the usage:
 
 
-``` {.language-markup}
+```
 from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering, MeanShift, estimate_bandwidth, SpectralClustering
 from hdbscan import HDBSCAN
 
@@ -1576,12 +1484,6 @@ Automated unsupervised learning is a highly experimental process,
 especially if you don\'t know much about your data. As an exercise, you
 can extend the [Unsupervised\_AutoML] class to try with more than
 one hyperparameter set for each algorithm and visualize the results.
-
-
-
-
-
-
 
 
 

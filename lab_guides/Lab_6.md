@@ -1,138 +1,25 @@
 
-Creating AutoML Pipelines
-=========================
+Lab 6: Creating AutoML Pipelines
+================================
 
-The previous labs focused on the different stages that are required
-to be executed in a **machine learning** (**ML**) project. Many moving
-parts have to be tied together for an ML model to execute and produce
-results successfully. This process of tying together different pieces of
-the ML process is known as **pipelines**. A pipeline is a generalized
-concept but very important concept for a Data Scientist. In software
-engineering, people build pipelines to develop software that is
-exercised from source code to deployment. Similarly, in ML, a pipeline
-is created to allow data flow from its raw format to some useful
-information. It provides mechanism to construct a multi-ML parallel
-pipeline system in order to compare the results of several ML methods.
-
-Each stage of a pipeline is fed processed data from its preceding stage;
-that is, the output of a processing unit is supplied as an input to its
-next step. The data flows through the pipeline just as water flows in a
-pipe. Mastering the pipeline concept is a powerful way to create
-error-free ML models, and pipelines form a crucial element for building
-an AutoML system. In this lab, we will work on the following topics:
+In this lab, we will work on the following topics:
 
 -   Introduction to ML pipelines
 -   Building a simple pipeline
 -   Function transformer
 -   Building a complex pipeline using weak learners and ensembles
 
-We will begin with an introduction to ML pipelines in the next section.
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
 
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup.
 
+All notebooks are present in `lab 06` folder.
 
-
-
-
-
-
-
-Technical requirements
-======================
-
-All the code examples can be found in the [Lab 06] folder in
-the GitHub link for this lab.
-
-
-
-
-
-
-
-
-
-
-An introduction to machine learning pipelines
-=============================================
-
-Usually, an ML algorithm needs clean data to detect some patterns in the
-data and make predictions over a new dataset. However, in real-world
-applications, the data is often not ready to be directly fed into an ML
-algorithm. Similarly, the output from an ML model is just numbers or
-characters that need to be processed for performing some actions in the
-real world. To accomplish that, the ML model has to be deployed in a
-production environment. This entire framework of converting raw data to
-usable information is performed using a ML pipeline.
-
-The following is a high-level illustration of an ML pipeline:
-
-
-![](./images/b77651b4-f0bf-4f3a-82ff-bd314ea66460.png)
-
-
-We will break down the blocks illustrated in the preceding figure as
-follows:
-
--   **Data Ingestion**: It is the process of obtaining data and
-    importing data for use. Data can be sourced from multiple systems,
-    such as **Enterprise Resource Planning** (**ERP**) software,
-    **Customer Relationship Management** (**CRM**) software, and web
-    applications. The data extraction can be in the real time or
-    batches. Sometimes, acquiring the data is a tricky part and is one
-    of the most challenging steps as we need to have a good business and
-    data understanding abilities.
-
-```{=html}
-
-```
--   **Data Preparation**: We studied various data preparation techniques
-    in Lab 3,
-    *Data Preprocessing*. There are several methods to preprocess the
-    data to a suitable form for building models. Real-world data is
-    often skewed---there is missing data, which is sometimes noisy. It
-    is, therefore, necessary to preprocess the data to make it clean and
-    transformed, so it\'s ready to be run through the ML algorithms.
--   **ML model training**: It involves the use of various ML techniques
-    to understand essential features in the data, make predictions, or
-    derive insights out of it. Often, the ML algorithms are already
-    coded and available as API or programming interfaces. The most
-    important responsibility we need to take is to tune the
-    hyperparameters. The use of hyperparameters and optimizing them to
-    create a best-fitting model are the most critical and complicated
-    parts of the model training phase.
--   **Model Evaluation**: There are various criteria using which a model
-    can be evaluated. It is a combination of statistical methods and
-    business rules. In an AutoML pipeline, the evaluation is mostly
-    based on various statistical and mathematical measures. If an AutoML
-    system is developed for some specific business domain or use cases,
-    then the business rules can also be embedded into the system to
-    evaluate the correctness of a model.
--   **Retraining**: The first model that we create for a use case is not
-    often the best model. It is considered as a baseline model, and we
-    try to improve the model\'s accuracy by training it repetitively.
--   **Deployment**: The final step is to deploy the model that involves
-    applying and migrating the model to business operations for their
-    use. The deployment stage is highly dependent on the IT
-    infrastructure and software capabilities an organization has.
-
-As we see, there are several stages that we will need to perform to get
-results out of an ML model. The scikit-learn provides us a pipeline
-functionality that can be used to create several complex pipelines.
-While building an AutoML system, pipelines are going to be very complex,
-as many different scenarios have to be captured. However, if we know how
-to preprocess the data, utilizing an ML algorithm and applying various
-evaluation metrics, a pipeline is a matter of giving a shape to those
-pieces.
 
 Let\'s design a very simple pipeline using scikit-learn.
-
-
-
-
-
-
-
-
 
 
 A simple pipeline
@@ -162,7 +49,7 @@ measure:
     necessary methods needed to create an ML pipeline:
 
 
-``` {.language-markup}
+```
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LogisticRegression
@@ -178,7 +65,7 @@ from sklearn.pipeline import Pipeline
     the dimension of the dataset:
 
 
-``` {.language-markup}
+```
 # Load and split the data
 iris = load_iris()
 X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2, random_state=42)
@@ -197,7 +84,7 @@ X_train.shape
 4.  Next, we print the dataset to take a glance at the data:
 
 
-``` {.language-markup}
+```
 print(X_train)
 ```
 
@@ -216,7 +103,7 @@ The preceding code provides the following output:
     [LogisticRegression(random\_state=42)] as [lr]:
 
 
-``` {.language-markup}
+```
 pipe_lr = Pipeline([('minmax', MinMaxScaler()),
  ('lr', LogisticRegression(random_state=42))])
 ```
@@ -226,7 +113,7 @@ pipe_lr = Pipeline([('minmax', MinMaxScaler()),
     training dataset:
 
 
-``` {.language-markup}
+```
 pipe_lr.fit(X_train, y_train)
 ```
 
@@ -242,7 +129,7 @@ pipe_lr.fit(X_train, y_train)
     using the [score] method:
 
 
-``` {.language-markup}
+```
 score = pipe_lr.score(X_test, y_test)
 print('Logistic Regression pipeline test accuracy: %.3f' % score)
 ```
@@ -318,7 +205,7 @@ In the following example, we will build a pipeline using the
     together to other stages in a pipeline:
 
 
-``` {.language-markup}
+```
 import numpy as np
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
@@ -334,7 +221,7 @@ from sklearn.preprocessing import StandardScaler
     which returns the log of a number [X]:
 
 
-``` {.language-markup}
+```
 def CustomLog(X):
     return np.log(X)
 ```
@@ -348,9 +235,7 @@ def CustomLog(X):
     world, we can directly use this function to create a supervised ML
     model.
 
-```{=html}
 
-```
 4.  Here, we use a [make\_pipeline] function to create a pipeline.
     We used the [pipeline] function in our earlier example, where
     we have to define names for the data preprocessing or ML functions.
@@ -358,7 +243,7 @@ def CustomLog(X):
     generates the names or keys of a function automatically:
 
 
-``` {.language-markup}
+```
 def PreprocData(X, Y):
 pipe = make_pipeline(
  FunctionTransformer(CustomLog),StandardScaler()
@@ -374,7 +259,7 @@ pipe = make_pipeline(
     data:
 
 
-``` {.language-markup}
+```
 iris = load_iris()
 X, Y = iris.data, iris.target
 print(X)
@@ -393,7 +278,7 @@ The preceding code prints the following output:
     and then using the [StandardScaler] data preprocessing method:
 
 
-``` {.language-markup}
+```
 X_transformed, Y_transformed = PreprocData(X, Y)
 print(X_transformed)
 ```
@@ -438,7 +323,7 @@ We will proceed as follows:
     required for the task:
 
 
-``` {.language-markup}
+```
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -459,7 +344,7 @@ from sklearn.pipeline import Pipeline
     testing the trained model:
 
 
-``` {.language-markup}
+```
 # Load and split the data
 iris = load_iris()
 X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2, random_state=42)
@@ -488,7 +373,7 @@ The following is the code snippet for creating these four different
 pipelines used to create four different models:
 
 
-``` {.language-markup}
+```
 # Construct svm pipeline
 
 pipe_svm = Pipeline([('ss1', StandardScaler()),
@@ -517,7 +402,7 @@ pipe_rf = Pipeline([('ss4', StandardScaler()),
     which would be used to display results:
 
 
-``` {.language-markup}
+```
 pipe_dic = {0: 'K Nearest Neighbours', 1: 'Decision Tree', 2:'Random Forest', 3:'Support Vector Machines'}
 ```
 
@@ -526,7 +411,7 @@ pipe_dic = {0: 'K Nearest Neighbours', 1: 'Decision Tree', 2:'Random Forest', 3:
     iteratively:
 
 
-``` {.language-markup}
+```
 pipelines = [pipe_knn, pipe_dt,pipe_rf,pipe_svm]
 ```
 
@@ -539,7 +424,7 @@ In the following code snippet, we fit each of the four pipelines
 iteratively to the training dataset:
 
 
-``` {.language-markup}
+```
 # Fit the pipelines
 for pipe in pipelines:
   pipe.fit(X_train, y_train)
@@ -550,7 +435,7 @@ for pipe in pipelines:
     accuracy of the four models using the following code snippet:
 
 
-``` {.language-markup}
+```
 # Compare accuracies
 for idx, val in enumerate(pipelines):
   print('%s pipeline test accuracy: %.3f' % (pipe_dic[idx], val.score(X_test, y_test)))
@@ -571,7 +456,7 @@ for idx, val in enumerate(pipelines):
     accomplish this using the following code snippet:
 
 
-``` {.language-markup}
+```
 best_accuracy = 0
 best_classifier = 0
 best_pipeline = ''
@@ -592,12 +477,6 @@ print('%s Classifier has the best accuracy of %.2f' % (pipe_dic[best_classifier]
 
 
 ![](./images/b4f37b6a-1f47-4c6b-935e-f871ba421ba3.png)
-
-
-
-
-
-
 
 
 

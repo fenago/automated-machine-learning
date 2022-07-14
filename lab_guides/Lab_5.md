@@ -1,57 +1,6 @@
 
-Hyperparameter Optimization
-===========================
-
-The auto-sklearn library uses **Bayesian optimization** to tune the
-hyperparameters of **machine learning** (**ML**) pipelines. You will
-learn the inner workings of Bayesian optimization, but let\'s first
-review the basics of mathematical optimization.
-
-In simple terms, optimization deals with selecting the best values to
-minimize or maximize a given function. A function is called a **loss
-function** or a **cost function** if our objective is minimization. If
-you are trying to maximize it, then it\'s called a **utility function**
-or a **fitness function**. For example, when you are building ML models,
-a loss function helps you to minimize the prediction error during the
-training phase.
-
-When you look at this whole process from a wider angle, there are many
-variables that come into play.
-
-First, you may work on a system to decide the type of problem, such as
-an unsupervised, supervised, semi-supervised, or reinforcement learning
-problem. You may decide on a hardware and software configuration
-depending on the data size and complexity. Then you may choose the
-suitable languages or libraries to use in your experiments. From a set
-of available transformers and estimators, you may choose a subset of
-them to be used during the training, validation, and testing phases.
-
-All of these could be called **configuration parameters** to set the
-scene for developing ML pipelines.
-
-Second, transformers and estimators have their own parameters to figure
-out during the training phase, such as coefficients in linear models, or
-degree parameters to create polynomial and interaction features.
-
-For example, ML algorithms are usually classified as parametric or
-non-parametric. If an algorithm has a fixed number of parameters, which
-means the function form is known, then it\'s a parametric; if not, then
-it\'s called a **non-parametric** and your data will shape the
-function\'s form.
-
-Third, apart from parameters, you need to set hyperparameters before
-training starts to guide the estimation of transformer and estimator
-parameters.
-
-Hyperparameters are particularly important because your pipeline\'s
-performance will depend on them, and since there are many
-hyperparameters where each can take a range of values, you quickly come
-to the realization that this is an optimization problem.
-
-Given hyperparameters and the range of values that they can take, which
-is your search space, how can you efficiently find the best performing
-ML pipeline? In practice, the best performing ML pipeline is the one
-that has the best cross-validation score.
+Lab 5: Hyperparameter Optimization
+==================================
 
 The following topics will be covered in this lab:
 
@@ -62,27 +11,13 @@ The following topics will be covered in this lab:
 -   An example system
 
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
 
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup.
 
-
-
-
-
-
-
-Technical requirements
-======================
-
-You can find all the code examples in the [Lab 05] folder of
-the course\'s repository.
-
-
-
-
-
-
-
-
+All notebooks are present in `lab 05` folder.
 
 
 Hyperparameters
@@ -99,7 +34,7 @@ The following code snippet shows you the minimization of the Branin
 function:
 
 
-``` {.language-markup}
+```
 import numpy as np
 
 def branin(x):
@@ -144,7 +79,7 @@ print(res)
 Executing the previous code snippet will result in the following output:
 
 
-``` {.language-markup}
+```
 fun: 0.3978873577297417
 hess_inv: array([[0.10409341, -0.0808961],
 [-0.0808961, 0.56160622]])
@@ -192,7 +127,7 @@ Let\'s look at a brief example of estimator parameters in
 [sklearn]:
 
 
-``` {.language-markup}
+```
 from sklearn.linear_model import LogisticRegression
 
 log_reg = LogisticRegression()
@@ -203,7 +138,7 @@ log_reg.get_params()
 The output will look as follows:
 
 
-``` {.language-markup}
+```
 {'C': 1.0,
  'class_weight': None,
  'dual': False,
@@ -246,7 +181,7 @@ For example, you can use [GridSearchCV] or
     you have the following parameter grid:
 
 
-``` {.language-markup}
+```
 # Hyperparameters
 param_grid = [ {'C': [0.001, 0.01, 0.1, 1, 10, 20, 50, 100],
                 'penalty': ['l1', 'l2']} ]
@@ -256,7 +191,7 @@ param_grid = [ {'C': [0.001, 0.01, 0.1, 1, 10, 20, 50, 100],
 Then [GridSearhCV] will generate the following parameters:
 
 
-``` {.language-markup}
+```
 'params': [{'C': 0.001, 'penalty': 'l1'},
   {'C': 0.001, 'penalty': 'l2'},
   {'C': 0.01, 'penalty': 'l1'},
@@ -286,7 +221,7 @@ score.
     following way:
 
 
-``` {.language-markup}
+```
 # Hyperparameters
 param_grid = {'C': sp_randint(1, 100),
                 'penalty': ['l1', 'l2']}
@@ -298,7 +233,7 @@ Have you noticed [sp\_randint]? It will allow
 distribution and parameters will be created as follows:
 
 
-``` {.language-markup}
+```
 'params': [{'C': 6, 'penalty': 'l2'},
   {'C': 97, 'penalty': 'l2'},
   {'C': 92, 'penalty': 'l2'},
@@ -328,7 +263,7 @@ and [RandomizedSearchCV].
 The following snippet shows you [GridSearchCV]:
 
 
-``` {.language-markup}
+```
 from sklearn.linear_model import LogisticRegression
 
 log_reg = LogisticRegression()
@@ -354,7 +289,7 @@ estimator.fit(X, Y)
 You will see the following output:
 
 
-``` {.language-markup}
+```
 GridSearchCV(cv=5, error_score='raise',
        estimator=LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
           intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
@@ -371,7 +306,7 @@ Once training is done, you can see the best performing estimator
 settings:
 
 
-``` {.language-markup}
+```
 estimator.best_estimator_
 ```
 
@@ -379,7 +314,7 @@ estimator.best_estimator_
 The preceding code will generate the following output:
 
 
-``` {.language-markup}
+```
 LogisticRegression(C=10, class_weight=None, dual=False, fit_intercept=True,
 intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
 penalty='l1', random_state=None, solver='liblinear', tol=0.0001,
@@ -390,7 +325,7 @@ verbose=0, warm_start=False)
 You can also see the best score:
 
 
-``` {.language-markup}
+```
 estimator.best_score_
 ```
 
@@ -398,7 +333,7 @@ estimator.best_score_
 With the following output:
 
 
-``` {.language-markup}
+```
 0.98
 ```
 
@@ -406,7 +341,7 @@ With the following output:
 You can also see all results by checking [cv\_results\_]:
 
 
-``` {.language-markup}
+```
 estimator.cv_results_
 ```
 
@@ -414,7 +349,7 @@ estimator.cv_results_
 This will give you various metrics for each training run:
 
 
-``` {.language-markup}
+```
 {'mean_fit_time': array([0.00039144, 0.00042701, 0.00036378, 0.00043044, 0.00145531,
         0.00046387, 0.00670047, 0.00056334, 0.00890565, 0.00064907,
         0.00916181, 0.00063758, 0.01110044, 0.00076027, 0.01196856,
@@ -523,7 +458,7 @@ This will give you various metrics for each training run:
 Let\'s see how it works for [RandomizedSearchCV]:
 
 
-``` {.language-markup}
+```
 from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import randint as sp_randint
 
@@ -543,7 +478,7 @@ The preceding code generates the following output similar to
 [GridSearchCV]:
 
 
-``` {.language-markup}
+```
 RandomizedSearchCV(cv=5, error_score='raise',
           estimator=LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
           intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
@@ -559,7 +494,7 @@ RandomizedSearchCV(cv=5, error_score='raise',
 Let\'s also see [best\_estimator\_]:
 
 
-``` {.language-markup}
+```
 estimator.best_estimator_
 ```
 
@@ -567,7 +502,7 @@ estimator.best_estimator_
 The preceding code generates the following output:
 
 
-``` {.language-markup}
+```
 LogisticRegression(C = 95, class_weight=None, dual=False, fit_intercept=True,
           intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
           penalty ='l2', random_state=None, solver='liblinear', tol=0.0001,
@@ -578,7 +513,7 @@ LogisticRegression(C = 95, class_weight=None, dual=False, fit_intercept=True,
 The [estimator.best\_score\_] shows the following output:
 
 
-``` {.language-markup}
+```
 0.98
 ```
 
@@ -592,7 +527,7 @@ You can similarly check results of cross-validation with
 [estimator.cv\_results\_]:
 
 
-``` {.language-markup}
+```
 {'mean_fit_time': array([0.0091342 , 0.00065241, 0.00873041, 0.00068126, 0.00082703,
         0.01093817, 0.00067267, 0.00961967, 0.00883713, 0.00069351,
         0.01048965, 0.00068388, 0.01074204, 0.0090354 , 0.00983639,
@@ -706,7 +641,7 @@ Cross-validation results may look messy but you can import them to
 [pandas] DataFrame:
 
 
-``` {.language-markup}
+```
 import pandas as pd
 
 df = pd.DataFrame(estimator.cv_results_)
@@ -718,7 +653,7 @@ df.head()
 We can see a couple of records as follows:
 
 
-``` {.language-markup}
+```
 mean_fit_time mean_score_time mean_test_score mean_train_score param_C \
 0 0.009134 0.000261 0.966667 0.973333 20 
 1 0.000652 0.000165 0.973333 0.978333 53 
@@ -763,7 +698,7 @@ You can filter DataFrame to see where [mean\_test\_score] is at
 its maximum:
 
 
-``` {.language-markup}
+```
 df[df['mean_test_score'] == df['mean_test_score'].max()]
 ```
 
@@ -771,7 +706,7 @@ df[df['mean_test_score'] == df['mean_test_score'].max()]
 This outputs the following:
 
 
-``` {.language-markup}
+```
     mean_fit_time mean_score_time mean_test_score mean_train_score param_C \
 3 0.000681 0.000177 0.98 0.980000 95 
 8 0.008837 0.000261 0.98 0.973333 8 
@@ -846,7 +781,7 @@ example shows you the training time the first time, and after the
 parameter update when it\'s set to [False]:
 
 
-``` {.language-markup}
+```
 from sklearn.linear_model import LogisticRegression
 
 log_reg = LogisticRegression(C=10, tol=0.00001)
@@ -887,7 +822,7 @@ The following code snippet shows you a small example of how it works in
 practice:
 
 
-``` {.language-markup}
+```
 log_reg = LogisticRegression(C=10, solver='sag', warm_start=True, max_iter=10000)
 
 start = time()
@@ -943,7 +878,7 @@ The following snippet shows you how to optimize the [branin]
 function that you used at the beginning with SMAC:
 
 
-``` {.language-markup}
+```
 from smac.facade.func_facade import fmin_smac
 
 x, cost, _ = fmin_smac(func=branin, # function
@@ -975,7 +910,7 @@ XGBoost algorithm hyperparameters to improve performance on the [Breast
 Cancer Wisconsin] dataset:
 
 
-``` {.language-markup}
+```
 # Importing necessary libraries
 import numpy as np
 from xgboost import XGBClassifier
@@ -1070,7 +1005,7 @@ You can use the SMAC object to get a run history and see the cost of
 each configuration:
 
 
-``` {.language-markup}
+```
 param_1 = []
 param_2 = []
 costs = []
@@ -1105,12 +1040,6 @@ You can see that the best configurations were \~0.09 for
 
 
 
-
-
-
-
-
-
 Summary
 =======
 
@@ -1129,10 +1058,3 @@ such as grid search and randomized search. Grid search and randomized
 search do not use the information produced from previous training runs
 and this is a disadvantage that Bayesian-based optimization methods
 address.
-
-Bayesian-based optimization methods leverage the information of previous
-training runs to decide what will be the hyperparameter values for the
-next training run and navigate through the hyperparameter space in a
-smarter way. SMAC is what auto-sklearn uses under the hood to optimize
-hyperparameters of a given estimator and this lab showed you how you
-can use this method with your own ML pipelines.

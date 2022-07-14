@@ -1,35 +1,6 @@
 
-Dive into Deep Learning
-=======================
-
-The next step in **artificial intelligence** (**AI**) is more about
-automation. In this course, we have covered some of the fundamentals of
-**Automated machine learning** (**AutoML**). There is one more area of
-AI that has just begun showing up in multiple use cases and is required
-to be applied extremely for automation. This area of the AI landscape is
-known as **deep learning** (**DL**). DL is at the tipping point of what
-machines can do. It can do more than **machine learning** (**ML**), with
-ease and with better precision. A DL algorithm can learn the critical
-features of a dataset by itself, can adjust the weights to create a
-better model, and much more. The applications of DL networks are
-extensive.
-
-With the advent of Deep learning, researchers and practitioners in the
-field of image, speech, and video recognition, are seeing some
-actionable results. It has helped AI to get close to its original goal
-of becoming the brains of the robot. It also has a role to play in the
-growing field of the **Internet of Things** (**IoT**). For enterprises,
-DL is already playing an important role in streamlining customer service
-and assisting in the automation of many human-intensive tasks. You might
-have, by now, encountered bots powered by DL trying to answer your
-product queries or helping you course your favorite pizza orders.
-
-DL is also unleashing developments in the field of medicine and
-healthcare. Don\'t be surprised if machines start diagnosing your
-diseases by reading X-rays and MRI scans. It is expected that DL would
-solve many mysteries that humanity has and automate substantial manual
-tasks that were not possible before. Interesting, isn\'t it? Let\'s
-unveil some of the deep secrets of DL.
+Lab 7: Dive into Deep Learning
+==============================
 
 In this lab, we will learn about:
 
@@ -44,239 +15,14 @@ essential concepts, they can be overwhelming. Instead, we will walk you
 through the concepts in an illustrative way and help you to write your
 very first DL codes.
 
-Neural networks are the precursors to DL networks, and they form the
-building blocks of the DL framework. The basic idea behind a neural
-network is to create a computing system that is modeled on the working
-of our biological brain.
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
 
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup.
 
-
-
-
-
-
-
-
-Technical requirements
-======================
-
-All the code examples can be found in the [Lab 07] folder in
-GitHub.
-
-
-
-
-
-
-
-
-
-
-Overview of neural networks
-===========================
-
-The best definition of a neural network is provided by an inventor, Dr.
-Robert Hecht-Nielsen, one of the first neurocomputer scientists, in
-*Neural Network Primer: Part I* by Maureen Caudill, AI Expert, Feb.
-1989:
-
-
-\...a computing system made up of a number of simple, highly
-interconnected processing elements, which process information by their
-dynamic state response to external inputs.
-
-
-The fundamental building blocks of neural networks are neurons, and they
-are organized in different layers. The tiered architecture has the
-neurons in each layer connected to neurons in the next layer. A neural
-network has, at a minimum, three layers. The input layer is connected to
-one or more hidden layers, where the connection is established through a
-system of **weighted** links. The last hidden layer is connected to the
-output layer which produces the results of a task.
-
-The following diagram illustrates a three-layered neural network:
-
-
-![](./images/8667f4c1-7d6a-4397-a91e-e022fbc767c3.png)
-
-
-This network is also known as a fully connected artificial neural
-network or a **feed-forward neural network** (**FNN**). There is another
-kind of neural network architecture where the results are propagated
-back to learn and adjust the weights, known as a **feed-forward neural
-network** with backpropagation, as shown in the following diagram:
-
-
-![](./images/934bc4ce-746b-4ec4-b411-3e9918ffc951.png)
-
-
-Let\'s examine each unit of a neural network in a comprehensive manner.
-
-
-
-Neuron
-======
-
-Neurons are the basic unit of a neural network. Each neuron has a number
-of inputs, a processor, and an output. The processing of a neuron starts
-by accumulating all of its incoming inputs, and, based on the activation
-function, it fires a signal that is propagated to other neurons or as an
-output signal. This helps neurons to learn. The most basic form of a
-neuron is known as the **perceptron**. A perceptron has a binary output
-of either 0 or 1.
-
-A typical neuron looks like the following:
-
-
-![](./images/5214a738-00ed-4207-8e58-64fd8c89fa5a.png)
-
-
-As we can see, neurons have several inputs. For each input connection,
-there is a weight associated with that specific connection. When the
-neuron is activated, the state is computed by adding the inputs
-multiplied by its corresponding connection\'s weight. Mathematically, it
-can be denoted by the following function:
-
-
-![](./images/5829c6c1-8a70-4533-9caa-ad660e04b089.png)
-
-
-Where *x~i~* is the input value with bias included.
-
-The bias is one more extra input, a neuron. A bias has its own
-connection weight, and the value of bias is always 1. This is there to
-make sure that even if there are no inputs, namely, the input value is
-0, there is going to be an activation in the neuron.
-
-Once the state is computed, the value is passed through an activation
-function to normalize the result.
-
-
-
-Activation functions
-====================
-
-Activation functions are used to produce non-linear decisions using the
-prior linear combination of weighted inputs. We will discuss four
-different types of activation functions that are predominantly used for
-DL applications:
-
--   Step
--   Sigmoid
--   ReLU
--   Tanh
-
-
-
-The step function
-=================
-
-In the step function, if the value of the weighted sum of inputs is
-greater than a certain threshold, the neuron is activated. Two options
-are as follows:
-
-
-![](./images/7dc5f438-9c3b-4ad0-b2fc-434dfdb13585.png)
-
-
-If *x*, namely the weighted sum of the input values, is greater than or
-equal to 0, 1 is activated, and 0 otherwise. The following figure
-illustrates the step function:
-
-
-![](./images/76351d74-8466-4095-81ae-3436e3e69999.png)
-
-
-The next widely used activation function is the **sigmoid** function.
-
-
-
-The sigmoid function
-====================
-
-The sigmoid function is defined as:
-
-
-![](./images/1e81ffa6-1c5a-4d48-b88e-d01d4047f2ef.png)
-
-
-Here, *x* is the value of the weighted sum of the input values. We have
-seen this function in logistic regression. When *x* is below zero it
-drops off, and anything above zero it approximates towards one. Unlike a
-step function, it is a non-linear activation function. It is mostly used
-in output layers in a neural network, when we work on classification
-tasks trying to predict probabilities. The following figure illustrates
-the sigmoid function:
-
-
-![](./images/420ad101-164d-47b0-9970-640614291886.png)
-
-
-The next activation function we discuss is **ReLU**, which is widely
-used in the hidden layers of a neural network.
-
-
-
-The ReLU function
-=================
-
-Researchers have found out that a neural network using **Rectified
-Linear Unit** (**ReLU**) function, trains faster than other non-linear
-functions like sigmoid and tanh without a significant drop in accuracy.
-So, the **ReLU function** is one of the most important activation
-functions. It gives an output of *x*, if *x* is positive, and O
-otherwise.
-
-It is defined as the following:
-
-*A(x) = max (0,x)*
-
-The ReLU function is as shown in the following figure:
-
-
-![](./images/4dcd75ac-2556-41d9-a36f-8d520dfc0932.png)
-
-
-
-ReLU is a non-linear function and the combination of ReLU functions are
-also non-linear. The range of ReLU is from 0 to infinity.
-
-
-Next, we discuss the tanh function, which is very similar to the sigmoid
-function, but here the values go below 0.
-
-
-
-The tanh function
-=================
-
-The tanh function is also known as the **hyperbolic tangent function**.
-The values go from -1 to +1.
-
-Its mathematical formula is as follows:
-
-
-![](./images/711193e2-5102-4f1c-8a60-c3643e86b109.png)
-
-
-The output of the tanh function is zero centered. It is also a
-non-linear function and so can be used to stack different layers. The
-tanh function is as shown in the following figure:
-
-
-![](./images/dda21853-a069-4122-89cd-234e405c5b93.png)
-
-
-Now that we have some idea about what a neural network is, the structure
-of a neural network, and its different components, let\'s create a
-feed-forward neural network using Keras.
-
-
-
-
-
-
+All notebooks are present in `lab 07` folder.
 
 
 
@@ -291,7 +37,7 @@ faster:
 1.  We start by importing the [numpy] and [pandas] library for data manipulation.
 
 
-``` {.language-markup}
+```
 import numpy as np
 import pandas as pd
 ```
@@ -300,7 +46,7 @@ import pandas as pd
 2.   Also, we set a [seed] that allows us to reproduce the script\'s results:
 
 
-``` {.language-markup}
+```
 numpy.random.seed(8)
 ```
 
@@ -312,7 +58,7 @@ numpy.random.seed(8)
     a user to build a fully connected network:
 
 
-``` {.language-markup}
+```
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 ```
@@ -323,7 +69,7 @@ from tensorflow.keras.layers import Dense
     are one-hot encoded to be used by Keras for building a DL model:
 
 
-``` {.language-markup}
+```
 #load hrdataset
 hr_data = pd.read_csv('data/hr.csv', header=0)
 # split into input (X) and output (Y) variables
@@ -344,7 +90,7 @@ The following is the output from the preceding code:
     the model:
 
 
-``` {.language-markup}
+```
 from sklearn.model_selection import train_test_split
  
 X_train, X_test, Y_train, Y_test = train_test_split(X, data_trnsf.left, test_size=0.3, random_state=42)
@@ -369,7 +115,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, data_trnsf.left, test_siz
     task:
 
 
-``` {.language-markup}
+```
 # create model
 model = Sequential()
 model.add(Dense(12, input_dim=20, activation='relu'))
@@ -390,7 +136,7 @@ model.add(Dense(1, activation='sigmoid'))
     optimizer:
 
 
-``` {.language-markup}
+```
 # Compile model
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 ```
@@ -404,7 +150,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
     [100] with a [batch\_size] of [10]:
 
 
-``` {.language-markup}
+```
 # Fit the model
 X_train = np.array(X_train)
 model.fit(X_train, Y_train, epochs=100, batch_size=10)
@@ -425,7 +171,7 @@ model.fit(X_train, Y_train, epochs=100, batch_size=10)
     the model\'s accuracy using the following code snippet:
 
 
-``` {.language-markup}
+```
 # evaluate the model
 scores = model.evaluate(X_train, Y_train)
 print("%s: %.4f%%" % (model.metrics_names[1], scores[1]*100))
@@ -519,7 +265,7 @@ which might be the anomalies in the data:
     libraries using the following code snippet:
 
 
-``` {.language-markup}
+```
 %matplotlib inline
 import numpy as np
 import pandas as pd
@@ -539,7 +285,7 @@ np.random.seed(8)
     data anomalies:
 
 
-``` {.language-markup}
+```
 # load autodesign
 auto_data = pd.read_csv('data/auto_design.csv')
 # split into input (X) and output (Y) variables
@@ -550,7 +296,7 @@ X_train, X_test = train_test_split(X, test_size=0.3, random_state=42)
 
 
 
-``` {.language-markup}
+```
 print(X_train)
 X_train.shape
 ```
@@ -569,7 +315,7 @@ We get the following output for the preceding code:
     snippet:
 
 
-``` {.language-markup}
+```
 input_dim = X_train.shape[1]
 encoding_dim = 12
 input_layer = Input(shape=(input_dim, ))
@@ -582,7 +328,7 @@ input_layer = Input(shape=(input_dim, ))
     reconstruct the input data pattern:
 
 
-``` {.language-markup}
+```
 encoded = Dense(encoding_dim, activation='relu')(input_layer)
 decoded = Dense(12, activation='linear')(encoded)
 ```
@@ -598,7 +344,7 @@ decoded = Dense(12, activation='linear')(encoded)
     [loss] is defined as [mse], which is mean squared error:
 
 
-``` {.language-markup}
+```
 autoencoder = Model(input_layer, decoded)
 autoencoder.compile(optimizer='adadelta', loss='mse')
 ```
@@ -610,7 +356,7 @@ autoencoder.compile(optimizer='adadelta', loss='mse')
     stable train or test loss value:
 
 
-``` {.language-markup}
+```
 X_train = np.array(X_train)
 autoencoder.fit(X_train, X_train,epochs=100,batch_size=4)
 ```
@@ -632,7 +378,7 @@ autoencoder.fit(X_train, X_train,epochs=100,batch_size=4)
     how much the reconstruction error was:
 
 
-``` {.language-markup}
+```
 predictions = autoencoder.predict(X_train)
 mse = np.mean(np.power(X_train - predictions, 2), axis=1)
 ```
@@ -642,7 +388,7 @@ mse = np.mean(np.power(X_train - predictions, 2), axis=1)
     index of input data which it was not able to reconstruct properly:
 
 
-``` {.language-markup}
+```
 plt.plot(mse)
 ```
 
@@ -843,7 +589,7 @@ We start building a Keras DL model, by defining a sequential model:
     network:
 
 
-``` {.language-markup}
+```
 #Model Definition
 cnn_model = Sequential()
 cnn_model.add(Conv2D(32, kernel_size=(5, 5), strides=(1, 1),activation='relu',input_shape=input))
@@ -862,7 +608,7 @@ cnn_model.add(Dense(num_classes, activation='softmax'))
     method:
 
 
-``` {.language-markup}
+```
 cnn_model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
  optimizer=tensorflow.keras.optimizers.Adam(),
  metrics=['accuracy'])
@@ -886,7 +632,7 @@ cnn_model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
     model using the following code snippet:
 
 
-``` {.language-markup}
+```
 model_score = cnn_model.evaluate(x_test, y_test, verbose=0)
 print('Loss on the test data:', model_score[0])
 print('Model accuracy on the test data:', model_score[1])

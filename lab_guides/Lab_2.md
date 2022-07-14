@@ -1,286 +1,21 @@
 
-Introduction to Machine Learning Using Python
-=============================================
-
-The last lab introduced you to the world of **machine learning**
-(**ML**). In this lab, we will develop the ML foundations that are
-required for building and using **Automated ML** (**AutoML**) platforms.
-It is not always clear how ML is best applied or what it takes to
-implement it. However, ML tools are getting more straightforward to use,
-and AutoML platforms are making it more accessible to a broader
-audience. In the future there will undoubtedly be a higher collaboration
-between man and machine.
-
-The future of ML may require people to prepare data for its consumption
-and identify use cases for implementation. More importantly, people are
-needed to interpret the results and audit the ML system---whether they
-are following the right and best approaches to solving a problem. The
-future looks pretty amazing, but we need to build that future; that\'s
-what we are going to do in this course. In this lab, we will walk you
-through the following topics:
-
--   Machine learning process and its different types
--   Supervised learning---regression and classification
--   Unsupervised learning---clustering
--   Ensembles---bagging, boosting, and stacking
--   Inferring tasks based on data
--   Task-specific evaluation metrics
-
-The objective of this lab is to
-provide you with an overview of the different ML techniques and discuss
-some of its essential aspects that are necessary to work on the
-subsequent labs.
-
-So, machines are excited to learn. Are you ready to help them? Hold on
-tight. Let\'s first look at what machine learning is!
+Lab 2: Introduction to Machine Learning Using Python
+====================================================
 
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
 
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup.
 
-
-
-
-
-
-
-Technical requirements
-======================
-
-All the code examples can be found in the [Lab 02] folder in
-GitHub.
-
-
-
-
-
-
-
-
-
-
-Machine learning
-================
-
-Machine learning dates back to centuries. It was born from the theory
-that computers can learn without being programmed to perform specific
-tasks. The iterative aspect of ML is essential as the machines need to
-adapt themselves to new data always. They need to learn from the
-historical data, optimize for better computations, and also generalize
-themselves to provide proper results.
-
-We all are aware of rule-based systems, where we have a set of
-predefined conditions for a machine to execute and provide the results.
-How great will it be when machines learn these patterns by themselves,
-deliver the results, and explain the rules that it discovered; this is
-ML. It is a broader term used for various methods and algorithms that
-are used by machines to learn from the data. As a branch of **artificial
-intelligence** (**AI**), the ML algorithms are quite often used to
-discover hidden patterns, establish a relationship, and also to predict
-something.
-
-Machine learning relies on some formatted inputs, and it provides a
-result based on the task. The input format is specific to the type of ML
-technique used and also to the algorithm considered. This specific
-representation of input data is termed **features** or **predictors**.
-
-
-
-Machine learning process
-========================
-
-How do we learn? When we were studying in school or university, we were
-taught by our teachers. We learned from their teachings (training). At
-the end of the term, we needed to take a test (testing), which was
-basically to validate our knowledge. The scores we obtained decided our
-fate (evaluation). Usually, the evaluation was carried out by
-considering a threshold to pass (baseline). The scores determined
-whether we needed to retake the subject or were ready to move to the
-next level (deployment).
-
-This is exactly how a machine learns as well. The words in the brackets
-are the terminology used by ML professionals. However, this is just one
-of the ways through which we, and the machines, learn. This is a typical
-supervised learning method. People sometimes learn from experience as
-well, and this is unsupervised learning. Let\'s study some more details
-about these learning methods.
-
-
-Broadly we have two categories of ML algorithms as described
-earlier---supervised and unsupervised learning. There are a few other
-types, such as reinforcement learning, transfer learning, and
-semi-supervised learning, which are less often used and so are not in
-the scope of this course.
-
-
-
-
-Supervised learning
-===================
-
-As the name suggests, the learning process is supervised based on a
-specified target/outcome.
-
-
-The objective of supervised ML models is to learn and discover the
-patterns that can correctly predict the outcome. In case of supervised
-learning, there is always a labeled historical dataset with a target
-attribute. All attributes other than the target are termed as
-**predictors**/**features**.
-
-
-The target can be a continuous numeric attribute, a binary attribute
-indicating yes/no decisions, or a multi-class attribute with more than
-two outcomes. Based on the target, the model identifies a pattern,
-establishes a relationship between the predictors, and then uses the
-derived recipe to predict unknown targets in a new independent dataset.
-
-Many ML algorithms fall into this class of learning methods, such as
-linear and logistics regression, decision trees, random forest, and
-**Support Vector Machines** (**SVMs**), to name a few.
-
-
-To identify and select the most suited algorithm for a job is the most
-critical task in an ML project. This is also an essential section that
-requires significant attention while creating an AutoML system. There
-are various factors that govern this selection process and they will be
-covered at length in this course.
-
-
-
-
-Unsupervised learning
-=====================
-
-Similarly, in the case of unsupervised learning, there is no target
-attribute. The objective of unsupervised learning is to identify
-patterns by deducing structures and the relations of the features in the
-input dataset. It can be used to discover rules that collectively define
-a group, such as topic generation, partitioning---such as customer
-segmentation or determining the internal structure of the data such as
-gene clustering. Examples of unsupervised learning algorithms include
-association rule mining and clustering algorithms.
-
-It is quite essential to know about different learning algorithms before
-creating an AutoML system. Before using an algorithm, it is critical to
-understand its triple **W**---**What** it is, **Where** is it used, and
-by **What** method it can be implemented.
-
-In the following sections, we will question different algorithms for
-their triple W, which will aid in creating a robust AutoML system.
-
-
-
-
-
-
-
-
+All notebooks are present in `lab 02` folder.
 
 
 Linear regression
 =================
 
 Let\'s begin our triple W session with linear regression first.
-
-
-
-What is linear regression?
-==========================
-
-It is the traditional and most-used regression analysis. It is studied
-rigorously and used widely for practical purposes. Linear regression is
-a method for determining the relationship between a dependent variable
-(*y*) and one or more independent variables (*x*). This derived
-relationship can be used to predict an unexplained *y* from observed
-*x*\'s. Mathematically, if *x* is an independent variable (commonly
-known as the predictor) and *y* is a dependent variable (also known as
-the target), the relationship is expressed as follows:
-
-
-![](./images/f603e0e2-8241-4940-a20f-b9dc86694823.png)
-
-
-Where *m* is the slope of line, *b* is the intercept of the best-fit
-regression line, and ε is the error term that is a deviation of the
-actual and predicted values.
-
-This is the equation for simple linear regression, as it involves only
-one predictor (*x*) and one target (*y*). When there are multiple
-predictors involved to predict a target, it is known as **multiple
-linear regression**. The term *linear* suggests there is a fundamental
-assumption that the underlying data exhibits a linear relationship.
-
-Let\'s create a scatter plot between two variables: **Quantity Sold**
-and **Revenue** of a product. We can infer from the plot that there is
-some positive relationship between these two variables, that is when the
-quantity of the products sold surged, the revenue went up. However, we
-can\'t establish a relationship between them to predict revenue from the
-quantity sold:
-
-
-![](./images/2d3e0ebb-5b4a-4b53-be29-f27fb9cfc84d.png)
-
-
-If we extend our previous scatter plot and add a trend line to it, we
-see the line of best fit. Any data points that lie on this line are
-flawlessly predicted values. As we move away from this line, the
-reliability of the prediction decreases:
-
-
-![](./images/7cf4c11d-4049-4722-8404-500a6ca4329f.png)
-
-
-So, how do we find the best fit line? The most common and widely used
-technique is the **ordinary least square** (**OLS**) estimate.
-
-
-
-Working of OLS regression
-=========================
-
-The OLS [LinearRegression] method is the most straightforward
-approach to fit a function to the data. It finds the best-fit line by
-minimizing the **sum of squared errors** (**SSE**) of the data. The SSE
-is the sum of the deviations of actual values from the mean. However, as
-always, the simplicity comes with a price. The price to pay for an
-excellent OLS method is adhering to its several fundamental assumptions.
-
-
-
-Assumptions of OLS
-==================
-
-All of these assumptions about the data should hold true to reap the
-benefits of the OLS regression techniques:
-
--   **Linearity**: The true underlying relationship between *X* and *Y*
-    is linear.
--   **Homoscedastic**: The variance of residuals must be constant. The
-    residual is the difference between the observed value and predictive
-    value of the target.
--   **Normality**: The residuals/errors should be normally distributed.
--   **No or little multicollinearity**: The residuals/errors must be
-    independent.
-
-OLS is also affected by the presence of outliers in the data. Outlier
-treatment is necessary before one proceeds with linear regression
-modeling using OLS linear regression.
-
-
-
-Where is linear regression used?
-================================
-
-Linear regression has many practical use cases, and most of them fall
-into one of the following two broad kinds:
-
--   If the goal is either a prediction or forecasting, it can be used to
-    build a predictive model to a recognized dataset of dependent and
-    independent values
--   If the goal is to determine the strength of a relationship between
-    the target and predictor variables, it can be applied to quantify
-    the change in *Y* for a given value of *X*
-
 
 
 By which method can linear regression be implemented?
@@ -297,9 +32,7 @@ Python:
     functions. It provides robust data structures for effective
     computation of multi-dimensional arrays and matrices.
 
-```{=html}
 
-```
 -   [pandas]: It provides the DataFrame object for data
     manipulation. A DataFrame can hold different types of values and
     arrays. It is used to read, write, and manipulate data in Python.
@@ -321,7 +54,7 @@ method from the scikit-learn package. We will use scikit-learn\'s
 example [Boston] dataset for the task:
 
 
-``` {.language-markup}
+```
 %matplotlib inline
 import numpy as np
 import pandas as pd
@@ -336,7 +69,7 @@ command. It is a dictionary, and we can examine its keys to view its
 content:
 
 
-``` {.language-markup}
+```
 boston_data = load_boston()
 boston_data.keys()
 ```
@@ -363,7 +96,7 @@ The [data.shape] function in Python is an excellent way to view
 the data dimensions (rows and columns):
 
 
-``` {.language-markup}
+```
 print(" Number of rows and columns in the data set ", boston_data.data.shape)
 print(boston_data.feature_names)
 ```
@@ -381,7 +114,7 @@ accomplished by calling the [DataFrame] function of the
 records to validate the data:
 
 
-``` {.language-markup}
+```
 boston_df =pd.DataFrame(boston_data.data)
 boston_df.head()
 ```
@@ -407,7 +140,7 @@ as the column names to the [boston\_df] DataFrame to have
 meaningful names:
 
 
-``` {.language-markup}
+```
 boston_df.columns = boston_data.feature_names
 ```
 
@@ -416,7 +149,7 @@ Once again, we check a sample of [boston] house rent data, and now
 it describes the columns better than previously:
 
 
-``` {.language-markup}
+```
 boston_df.head()
 ```
 
@@ -441,7 +174,7 @@ provides a constant value, which we can consider to be house price when
 all of the predictors are absent:
 
 
-``` {.language-markup}
+```
 boston_df['PRICE'] = boston_data.target
 X = boston_df.drop('PRICE', axis=1)
 lm = LinearRegression()
@@ -462,7 +195,7 @@ what predictors. So, we tie the features and coefficients together using
 the following code:
 
 
-``` {.language-markup}
+```
 pd.DataFrame(list(zip(X.columns, lm.coef_)),columns= ['features','estimatedCoefficients'])
 ```
 
@@ -480,7 +213,7 @@ the dynamics of a model and how it is going to perform in a production
 environment:
 
 
-``` {.language-markup}
+```
 lm.predict(X)[0:5
 mseFull = np.mean((boston_df.PRICE - lm.predict(X)) ** 2)
 print(mseFull)
@@ -509,7 +242,7 @@ held for testing. In the following code, we split the dataset into
 [train] and [test] sets, and retrain the model:
 
 
-``` {.language-markup}
+```
 #Train and Test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, boston_df.PRICE, test_size=0.3, random_state=42)
@@ -524,7 +257,7 @@ linear regression model, but now we would use only the training dataset
 ([X\_train] and [Y\_train]) to create the model:
 
 
-``` {.language-markup}
+```
 lm_tts = LinearRegression()
 lm_tts.fit(X_train, Y_train)
 print("Intercept: ", lm_tts.intercept_)
@@ -542,7 +275,7 @@ We predict the target values for both the [train] and [test]
 datasets, and calculate their **mean squared error** (**MSE**):
 
 
-``` {.language-markup}
+```
 pred_train = lm.predict(X_train)
 pred_test = lm.predict(X_test)
 print("MSE for Y_train:", np.mean((Y_train - lm.predict(X_train)) ** 2))
@@ -566,7 +299,7 @@ Next, let\'s paint a residual plot to see whether the residuals follow a
 linear pattern:
 
 
-``` {.language-markup}
+```
 plt.scatter(pred_train,pred_train - Y_train, c = 'b',s=40,alpha=0.5)
 plt.scatter(pred_test,pred_test - Y_test, c = 'r',s=40,alpha=0.7)
 plt.hlines(y = 0, xmin=0, xmax = 50)
@@ -766,7 +499,7 @@ A logistic regression model can be created by importing scikit-learn\'s
 previously for creating a linear regression model:
 
 
-``` {.language-markup}
+```
 import pandas as pd
 import numpy as np
 from sklearn import preprocessing
@@ -780,7 +513,7 @@ employees who have attrited in the past along with the employees who are
 continuing in the job:
 
 
-``` {.language-markup}
+```
 hr_data = pd.read_csv('data/hr.csv', header=0)
 hr_data.head()
 hr_data = hr_data.dropna()
@@ -827,7 +560,7 @@ encoded. In this case, we will be dummy encoding [salary] and
 [sales] attributes of the [HR] dataset:
 
 
-``` {.language-markup}
+```
 data_trnsf = pd.get_dummies(hr_data, columns =['salary', 'sales'])
 data_trnsf.columns
 ```
@@ -848,7 +581,7 @@ input predictors dataset referred as to [X] in the code. The left
 attribute is denoted by [Y] (target):
 
 
-``` {.language-markup}
+```
 X = data_trnsf.drop('left', axis=1)
 X.columns
 ```
@@ -866,7 +599,7 @@ regression model and the remaining 30% to evaluate the accuracy of the
 model:
 
 
-``` {.language-markup}
+```
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, data_trnsf.left, test_size=0.3, random_state=42)
 print(X_train)
@@ -883,7 +616,7 @@ the test data. First, we create an instance of the
 classifier on the training data:
 
 
-``` {.language-markup}
+```
 attrition_classifier = LogisticRegression()
 attrition_classifier.fit(X_train, Y_train)
 ```
@@ -894,7 +627,7 @@ method on the test input predictor dataset to predict the corresponding
 target values ([Y\_pred]):
 
 
-``` {.language-markup}
+```
 Y_pred = attrition_classifier.predict(X_test)
 ```
 
@@ -910,7 +643,7 @@ classifier\'s accuracy is calculated. The accuracy of our classifier is
 0.79 or 79%, which means 79% of cases were correctly predicted:
 
 
-``` {.language-markup}
+```
 from sklearn.metrics import confusion_matrix
 confusion_matrix = confusion_matrix(Y_test, Y_pred)
 print(confusion_matrix)
@@ -935,7 +668,7 @@ model. We can retrieve the scores for all these metrics by importing the
 method:
 
 
-``` {.language-markup}
+```
 from sklearn.metrics import classification_report
 print(classification_report(Y_test, Y_pred))
 ```
@@ -954,7 +687,7 @@ summarizes the performance of the classifier based on the ROC curve. The
 following code snippet can be used to draw a ROC curve using Python:
 
 
-``` {.language-markup}
+```
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
 
@@ -1180,7 +913,7 @@ Decision tree models can be created by importing scikit-learn\'s
 [DecisionTreeClassifier]:
 
 
-``` {.language-markup}
+```
 import numpy as np
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
@@ -1194,7 +927,7 @@ preprocessing that was done in the previous logistics regression
 example:
 
 
-``` {.language-markup}
+```
 hr_data = pd.read_csv('data/hr.csv', header=0)
 hr_data.head()
 hr_data = hr_data.dropna()
@@ -1214,7 +947,7 @@ The following code creates the dummy variables for categorical data and
 splits the data into [train] and [test] sets:
 
 
-``` {.language-markup}
+```
 data_trnsf = pd.get_dummies(hr_data, columns =['salary', 'sales'])
 data_trnsf.columns
 X = data_trnsf.drop('left', axis=1)
@@ -1241,7 +974,7 @@ decision tree model:
 Let\'s create a decision tree model using some of these parameters:
 
 
-``` {.language-markup}
+```
 attrition_tree = DecisionTreeClassifier(criterion = "gini", random_state = 100,
 max_depth=3, min_samples_leaf=5)
 attrition_tree.fit(X_train, Y_train)
@@ -1257,7 +990,7 @@ The output of the preceding code is as follows:
 Next, we generate a confusion matrix to evaluate the model:
 
 
-``` {.language-markup}
+```
 Y_pred = attrition_tree.predict(X_test)
 from sklearn.metrics import confusion_matrix
 confusionmatrix = confusion_matrix(Y_test, Y_pred)
@@ -1277,7 +1010,7 @@ negatives. However, let us validate our assumption based on the
 summarized evaluation metrics:
 
 
-``` {.language-markup}
+```
 print('Accuracy of Decision Tree classifier on test set: {:.2f}'.format(attrition_tree.score(X_test, Y_test)))
 from sklearn.metrics import classification_report
  print(classification_report(Y_test, Y_pred))
@@ -1345,7 +1078,7 @@ methods that we studied earlier. The only difference is to import the
 dataset to [train] and [test] sets:
 
 
-``` {.language-markup}
+```
 import numpy as np
 import pandas as pd
 from sklearn import svm
@@ -1375,7 +1108,7 @@ is not linearly separable, the data is mapped into a new space to make
 it linearly separable. This methodology is known as a **kernel trick**:
 
 
-``` {.language-markup}
+```
 attrition_svm = svm.SVC(kernel='linear') 
 attrition_svm.fit(X_train, Y_train)
 ```
@@ -1392,7 +1125,7 @@ After fitting the SVM model instance to the train data, we predict the
 to evaluate the model performance:
 
 
-``` {.language-markup}
+```
 Y_pred = attrition_svm.predict(X_test)
 from sklearn.metrics import confusion_matrix
 confusionmatrix = confusion_matrix(Y_test, Y_pred)
@@ -1409,7 +1142,7 @@ The output of the preceding code is as follows:
 Then, the values for model accuracy and other metrics are calculated:
 
 
-``` {.language-markup}
+```
 print('Accuracy of SVM classifier on test set: {:.2f}'.format(attrition_svm.score(X_test, Y_test)))
 from sklearn.metrics import classification_report
 print(classification_report(Y_test, Y_pred))
@@ -1485,7 +1218,7 @@ import the [HR] attrition dataset using the [pandas] library
 and split the dataset into [train] and [test] sets:
 
 
-``` {.language-markup}
+```
 import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
@@ -1520,7 +1253,7 @@ For the following [HR] attrition model, we defined
 [n\_neighbors] to be [6] and distance metric as Euclidean:
 
 
-``` {.language-markup}
+```
 n_neighbors = 6
 attrition_knn = KNeighborsClassifier(n_neighbors=n_neighbors, metric='euclidean')
 attrition_knn.fit(X_train, Y_train)
@@ -1537,7 +1270,7 @@ Then the prediction is made on the [test] dataset, and we review
 the confusion matrix along with other evaluation metrics:
 
 
-``` {.language-markup}
+```
 Y_pred = attrition_knn.predict(X_test)
 from sklearn.metrics import confusion_matrix
 confusionmatrix = confusion_matrix(Y_test, Y_pred)
@@ -1555,7 +1288,7 @@ The following code reports the accuracy score and values for other
 metrics:
 
 
-``` {.language-markup}
+```
 print('Accuracy of KNN classifier on test set: {:.2f}'.format(attrition_knn.score(X_test, Y_test)))
 from sklearn.metrics import classification_report
 print(classification_report(Y_test, Y_pred))
@@ -1643,7 +1376,7 @@ part of the code segment remains the same for this demonstration as
 well:
 
 
-``` {.language-markup}
+```
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
@@ -1681,7 +1414,7 @@ We create a random forest model using [n\_estimators] as
 following code snippet:
 
 
-``` {.language-markup}
+```
 num_trees = 100
 max_features = 3
 attrition_forest = RandomForestClassifier(n_estimators=num_trees, max_features=max_features)
@@ -1699,7 +1432,7 @@ Once a model is fitted successfully, we predict the [Y\_pred] from
 the [test] or hold out dataset:
 
 
-``` {.language-markup}
+```
 Y_pred = attrition_forest.predict(X_test)
 from sklearn.metrics import confusion_matrix
 confusionmatrix = confusion_matrix(Y_test, Y_pred)
@@ -1719,7 +1452,7 @@ Next, we check the accuracy of [Random Forest classifier] and
 [print] the classification report:
 
 
-``` {.language-markup}
+```
 print('Accuracy of Random Forest classifier on test set: {:.2f}'.format(attrition_forest.score(X_test, Y_test)))
 from sklearn.metrics import classification_report
 print(classification_report(Y_test, Y_pred))
@@ -1743,16 +1476,6 @@ another widely used ensemble modeling technique---boosting.
 Boosting
 ========
 
-Boosting is an iterative process in which consecutive models are built
-one after the another based on the flaws of the predecessors. This helps
-to diminish the bias in the model and also leads to a decrease in
-variance as well. Boosting tries to generate new classifiers that are
-better equipped to predict the values for which the previous model\'s
-performance was low. Unlike bagging, the resampling of the training data
-is conditioned on the performance of the earlier classifiers. Boosting
-uses all data to train the individual classifiers, but instances that
-were misclassified by the previous classifiers are given more importance
-so that subsequent classifiers enhance the results.
 
 **Gradient Boosting Machines** (**GBMs**), which is also known as
 **Stochastic Gradient Boosting** (**SGB**), is an example of the
@@ -1762,7 +1485,7 @@ converting the categorical dataset to one-hot encoded values and split
 the dataset into [train] and [test] set at a ratio of 70:30:
 
 
-``` {.language-markup}
+```
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import GradientBoostingClassifier
@@ -1799,14 +1522,12 @@ There are a few best parameters that are important for a
     than the number of features, it leads to the reduction of variance,
     but increases bias in the model.
 
-```{=html}
 
-```
 -   [max\_depth]: The maximum depth of each tree that is to be
     grown. The default value is [3]:
 
 
-``` {.language-markup}
+```
 num_trees = 100
 attrition_gradientboost= GradientBoostingClassifier(n_estimators=num_trees, random_state=42)
 attrition_gradientboost.fit(X_train, Y_train)
@@ -1823,7 +1544,7 @@ Once the model is successfully fitted to the dataset, we use the trained
 model to predict the [Y] values for [test] data:
 
 
-``` {.language-markup}
+```
 Y_pred = attrition_gradientboost.predict(X_test)
 
 from sklearn.metrics import confusion_matrix
@@ -1842,7 +1563,7 @@ errors:
 We print the accuracy and other metrics to evaluate the classifier:
 
 
-``` {.language-markup}
+```
 print('Accuracy of Gradient Boosting Classifier classifier on test set: {:.2f}'.format(attrition_gradientboost.score(X_test, Y_test)))
 from sklearn.metrics import classification_report
 print(classification_report(Y_test, Y_pred))
@@ -1858,30 +1579,6 @@ The output of the preceding code is as follows:
 The accuracy is 97%, which is excellent, but not as good as the random
 forest model. There is another kind of ensemble model which we will
 discuss in the following section.
-
-
-
-Stacking/blending
-=================
-
-In this method, multiple layers of classifiers are stacked/piled up one
-over the other. The prediction probabilities of the first layer of
-classifiers are applied to train the second layer of classifiers and so
-on. The final result is achieved by employing a base classifier such as
-logistic regression. We can also use different algorithms, such as
-decision trees, random forest, or GBM, as a final layer classifier.
-
-There is no out-of-the-box implementation for stacked ensembles in
-scikit-learn. However, we will demonstrate creating an automated
-function for stacked ensemble using scikit-learn\'s base algorithms in Lab 4.
-
-
-
-
-
-
-
-
 
 
 Comparing the results of classifiers
@@ -1934,7 +1631,7 @@ random forest model created earlier to evaluate its performance. Just
 add the following code snippet at the end of the random forest code:
 
 
-``` {.language-markup}
+```
 crossval_5_scores = cross_val_score(attrition_forest, X_train, Y_train, cv=5)
 print(crossval_5_scores)
 print(np.mean(crossval_5_scores))
@@ -1972,77 +1669,6 @@ clustering in the following section and autoencoders in Lab 7.
 Clustering
 ==========
 
-We will begin this section with a question. How do we start learning a
-new algorithm or a machine learning method? We start with triple W. So,
-let\'s being with that for the clustering method.
-
-
-
-What is clustering?
-===================
-
-Clustering is a technique to group similar data together, and a group
-has some unique characteristics that are different from other groups.
-Data can be clustered together using various methods. One of them is
-rule-based, where the groups are formed based on certain predefined
-conditions, such as grouping customers based on their age or industry.
-Another method is to use ML algorithms to cluster data together.
-
-
-
-Where is clustering used?
-=========================
-
-Being an unsupervised learning process, it is most often used in
-industries to deduce logical relationships and patterns from data.
-Clustering finds its application across sectors and business functions.
-It is used for information retrieval, customer segmentation, image
-segmentation, clustering unstructured text like web pages, news
-articles, and so on.
-
-
-
-By which method can clustering be implemented?
-==============================================
-
-There are various machine learning methods to create clusters. The
-clustering algorithms fall into one of the following groups:
-
--   **Hierarchical clustering**: It is also known as **agglomerative
-    clustering**, that tries to link each data point by a distance
-    measure to its nearest neighbor. This is a recursive process that
-    starts with one record and iteratively pairs them together until all
-    unite together into a single cluster. If we imagine, its structure
-    is similar to that of an inverted tree and can be visualized through
-    a dendrogram plot. One of the problems of using this method is the
-    process of determining the clusters. It is resource intensive, but
-    one can visualize the dendrogram plot and choose the number of
-    clusters.
--   **Partition-based clustering**: In this method, the data is split
-    into partitions. The partitioning is based on the distances between
-    the data points. The k-means algorithm is a commonly used partition
-    clustering method. In this method, the choice of the appropriate
-    distance function influences the shape of clusters. Euclidean,
-    Manhattan, and cosine distances are three distance functions that
-    are extensively used for creating k-means clusters. Euclidean
-    distance is most sensitive to the scale of the input vectors. In
-    such cases, one has to normalize or standardize the scale of input
-    vectors or pick a scale-insensitive distance measure such as cosine
-    distance.
--   **Density-based technique**: Here the clusters are formed by using a
-    specific probability distribution of the data points. The idea is to
-    continue spreading the clusters as long as the density in the
-    neighborhood surpasses a defined threshold. The high-density regions
-    are labeled as clusters segregated from the low-density areas, which
-    might be noise. Noise is a random variation or error in data that is
-    statistically uncertain and cannot be explained.
--   **Grid-based method**: In this method, first, hyper-rectangular grid
-    cells are created by dividing the attributes of a dataset. It then
-    drops low-density cells that are under a defined threshold
-    parameter. The adjacent high-density cells are then fused together
-    until the objective function is achieved or remains constant. The
-    resulting cells are interpreted as clusters.
-
 We are going to walk through hierarchical clustering and k-means
 clustering, which are two widely used methods in industries.
 
@@ -2061,7 +1687,7 @@ format, and there exist various other methods to accomplish this task.
 This topic will be covered in detail in the next lab:
 
 
-``` {.language-markup}
+```
 import pandas as pd
 import numpy as np
 from sklearn import preprocessing
@@ -2097,7 +1723,7 @@ Now, let us build an [AgglomerativeClustering] model using some of
 the described parameters:
 
 
-``` {.language-markup}
+```
 n_clusters = 3
 clustering = AgglomerativeClustering(n_clusters=n_clusters,
 affinity='euclidean', linkage='complete')
@@ -2126,7 +1752,7 @@ this is why the higher the average silhouette score, the better the
 clustering model:
 
 
-``` {.language-markup}
+```
 silhouette_avg = silhouette_score(data_trnsf, cluster_labels)
 print("For n_clusters =", n_clusters,"The average silhouette_score is :", silhouette_avg)
 ```
@@ -2155,7 +1781,7 @@ and the rest of the code remains similar to the hierarchical
 clustering\'s code:
 
 
-``` {.language-markup}
+```
 import pandas as pd
 import numpy as np
 from sklearn import preprocessing
@@ -2180,7 +1806,7 @@ fitted to the [KMeans] instance, and a model is built. We need to
 for [AgglomerativeClustering]:
 
 
-``` {.language-markup}
+```
 n_clusters = 3
 kmeans = KMeans(n_clusters=n_clusters)
 kmeans.fit(data_trnsf)
@@ -2192,7 +1818,7 @@ If we want to view the cluster centroid and labels, we can use
 [cluster\_centers\_] and [means\_labels\_] to do that:
 
 
-``` {.language-markup}
+```
 centroid = kmeans.cluster_centers_
 labels = kmeans.labels_
 print (centroid)
@@ -2215,13 +1841,6 @@ for hierarchical clusters.
 This means that the three clusters are better formed in a k-means model
 than that of the hierarchical model built on the [HR] attrition
 dataset.
-
-
-
-
-
-
-
 
 
 
