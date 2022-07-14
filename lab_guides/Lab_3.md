@@ -1326,8 +1326,8 @@ nltk.download()
 ```
 
 
-You will get a NLTK Downloader popup. Select [all]{.packt_screen} from
-the [Identifier]{.packt_screen} section and wait for installation to be
+You will get a NLTK Downloader popup. Select [all] from
+the [Identifier] section and wait for installation to be
 completed.
 
 In this section, we will study some of the preprocessing steps that are

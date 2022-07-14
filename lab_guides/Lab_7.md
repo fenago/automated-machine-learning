@@ -288,23 +288,19 @@ Keras is a DL library, originally built on Python, that runs over
 TensorFlow or Theano. It was developed to make DL implementations
 faster:
 
-1.  We call [install keras] using the following command in your
-    operation system\'s Command Prompt:
-
-
-``` {.language-markup}
-pip install keras
-```
-
-
-2.  We start by importing the [numpy] and [pandas] library
-    for data manipulation. Also, we set a [seed] that allows us to
-    reproduce the script\'s results:
+1.  We start by importing the [numpy] and [pandas] library for data manipulation.
 
 
 ``` {.language-markup}
 import numpy as np
 import pandas as pd
+```
+
+
+2.   Also, we set a [seed] that allows us to reproduce the script\'s results:
+
+
+``` {.language-markup}
 numpy.random.seed(8)
 ```
 
@@ -317,8 +313,8 @@ numpy.random.seed(8)
 
 
 ``` {.language-markup}
-from keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 ```
 
 
@@ -529,8 +525,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from keras.models import Model, load_model
-from keras.layers import Input, Dense
+from tensorflow.keras.models import Model, load_model
+from tensorflow.keras.layers import Input, Dense
 np.random.seed(8)
 ```
 
@@ -867,8 +863,8 @@ cnn_model.add(Dense(num_classes, activation='softmax'))
 
 
 ``` {.language-markup}
-cnn_model.compile(loss=keras.losses.categorical_crossentropy,
- optimizer=keras.optimizers.Adam(),
+cnn_model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
+ optimizer=tensorflow.keras.optimizers.Adam(),
  metrics=['accuracy'])
  cnn_model.fit(x_train, y_train,
  batch_size=10,
