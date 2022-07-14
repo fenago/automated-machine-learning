@@ -373,16 +373,8 @@ In Python, [fancyimpute] is a library that provides the advanced
 data mining options to impute missing values. This is something that we
 use most often and so we thought to demonstrate this package. There
 might be some other libraries in Python that can also do a similar task.
-First, we need to install the [fancyimpute] library using the
-following command. This has to be executed from the Command Prompt:
 
-
-```
-pip install fancyimpute
-```
-
-
-Once installed, we can return to the Jupyter notebook and import the
+We can return to the Jupyter notebook and import the
 [KNN] method from the [fancyimpute] library. The KNN
 imputation method is only going to work for numeric values. So, we first
 select only numeric columns from the [hr\_data] set. Next, a KNN
@@ -948,14 +940,6 @@ Some extensively used methods are described in the following section:
 
 Most of these techniques, along with many others, are also implemented
 in Python and are available in the package [category\_encoders].
-You can install the [category\_encoders] library using the
-following command:
-
-
-```
-pip install category_encoders
-```
-
 
 Next, we import the [category\_encoders] library as [ce] (a
 short code that supports using it easily in code). We load the
