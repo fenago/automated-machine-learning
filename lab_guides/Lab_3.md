@@ -563,7 +563,6 @@ and resulting outlier free data is generated:
 ```
 ##### Winsorization ####
 from scipy.stats.mstats import winsorize
-import statsmodels.api as sm
 limit = 0.15
 winsorized_data = winsorize(final_data,limits=limit)
 #Check winsorized data
@@ -1211,51 +1210,6 @@ changing the [k] value:
 
 The following section demonstrates the recursive feature elimination
 method.
-
-
-
-Recursive feature elimination
-=============================
-
-Recursive feature elimination is based on the idea of recursively
-constructing a model by removing the features, building the model with
-the remaining features, and computing the model\'s accuracy. This
-process is repeated until all features in the dataset are exhausted. It
-is a greedy optimization method to find the best performing subset of
-features and then rank them according to when they were eliminated.
-
-In the following example code, the [HR] attrition dataset is used
-to illustrate the use of **recursive feature elimination** (**RFE**).
-The stability of the [RFE] method is heavily dependent on the type
-of algorithm used. For our demonstration, we have used the
-[LogisticRegression] method:
-
-
-```
-#Recursive Feature Elimination
-from sklearn.feature_selection import RFE
-from sklearn.linear_model import LogisticRegression
-
-# create a base classifier used to evaluate a subset of attributes
-logistic_model = LogisticRegression()
-
-# create the RFE model and select 4 attributes
-rfe = RFE(logistic_model, 4)
-rfe = rfe.fit(X, Y)
-
-# Ranking of the attributes
-print(sorted(zip(map(lambda x: round(x, 4), rfe.ranking_),X)))
-```
-
-
-The following output displays the features sorted by their ranks:
-
-
-![](./images/9ac1c739-1027-460c-b3bf-02dd4803f004.png)
-
-
-Random forests are often used in ML pipeline for feature selection. So,
-it is crucial that we get to know this technique.
 
 
 
